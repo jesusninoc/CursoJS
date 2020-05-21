@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var coleccion = [];
+        var coleccionConDatos = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var coleccionCompleja = new Array(10);
+
+        var arrayNumeros = [1, 2, 3, 4];
+        var arrayPalabras = ["Hola", "que", "tal", "estas"];
+        var arrayCosas = [1, "hola", 2, "que", false];
+
+        arrayNumeros = [1, 2, 3, 4];
+        console.log(arrayNumeros[0]); // retornará el valor 1
+        console.log(arrayNumeros[2]); // retornará el valor 2
+
+        arrayNumeros[0] = 5;
+        arrayNumeros[2] = 6;
+
+        arrayNumeros = [1, 2, 3, 4];
+        console.log(`El array tiene ${arrayNumeros.length}`);
+
+        // recorrer
+
+        console.log("Recorrer con un for");
+        for (let index = 0; index < arrayNumeros.length; index++) {
+            const element = arrayNumeros[index];
+            console.log(element);
+        }
+
+        console.log("Recorrer con un foreach");
+        arrayNumeros.forEach((element) => {
+            console.log(element);
+        });
+
+        // buscar elementos
+        arrayNombres = ["Borja", "Luis", "Jesus", "Roberto", "Manuel", "Victor"];
+        for (let index = 0; index < arrayNombres.length; index++) {
+            const element = arrayNombres[index];
+            if (element === "Luis") {
+                console.log("Elemento encontrado");
+            }
+        }
+
+        arrayNombres.forEach((element) => {
+            if (element === "Luis") {
+                console.log("Elemento encontrado");
+            }
+        });
+
+        // ordenarlo
+        arrayNombres = ["Borja", "Luis", "Jesus", "Roberto", "Manuel", "Victor"];
+        console.log("Array sin ordenar");
+        arrayNombres.forEach((element) => {
+            console.log(element);
+        });
+
+        arrayNombres.sort();
+        console.log("Array ordenado");
+        arrayNombres.forEach((element) => {
+            console.log(element);
+        });
+
+        // darle la vuelta
+        arrayNombres = ["Borja", "Luis", "Jesus", "Roberto", "Manuel", "Victor"];
+        console.log("\nArray normal");
+        arrayNombres.forEach((element) => {
+            console.log(element);
+        });
+
+        arrayNombres.reverse();
+        console.log("Array ordenado");
+        arrayNombres.forEach((element) => {
+            console.log(element);
+        });
+
+        // juntar arrays
+        arrayUno = [1, 2, 3, 4];
+        arrayDos = [5, 6, 7, 8];
+        arrayJuntar = arrayUno.concat(arrayDos);
+        console.log(arrayJuntar.toString());
+
+        // indice de elementos
+
+        arrayUno = [1, 2, 3, 4];
+        posicionNumero = arrayUno.indexOf(1);
+        if (arrayUno.indexOf(1) >= 0) {
+            console.log(`El índice del elemento 1 es ${posicionNumero}`);
+        } else {
+            console.log('El elemento no está presente');
+
+        }
+
+        arrayElementos = [1, 2, 3];
+        console.log('El array tienen una longitud de %d', arrayElementos.length);
+        arrayElementos.push(4, 4, 5);
+        console.log('El array tienen una longitud de %d', arrayElementos.length);
+        arrayElementos.unshift(0);
+        console.log('El array tienen una longitud de %d', arrayElementos.length);
+        arrayElementos.pop();
+        console.log('El array tienen una longitud de %d', arrayElementos.length);
+        arrayElementos.shift()
+        console.log('El array tienen una longitud de %d', arrayElementos.length);
+        arrayElementos.splice(4);
+        console.log('El array tienen una longitud de %d', arrayElementos.length);
+    </script>
+</body>
+
+</html>

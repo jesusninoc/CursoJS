@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var objetoCreado = {
+            nombre: "Borja",
+            apellido: "Martín",
+            edad: 18,
+            carnet: true,
+            mostrarDatos: function() {
+                console.log(this.nombre, this.apellido, this.edad, this.carnet);
+            }
+        };
+        console.log(objetoCreado.nombre);
+        console.log(objetoCreado.mostrarDatos());
+        console.log(objetoCreado['nombre']);
+    </script>
+</body>
+
+</html>

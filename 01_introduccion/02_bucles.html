@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var nota = 10;
+        if (nota < 5) {
+            console.log("El alumno ha suspendido");
+        } else if (nota < 10) {
+            if (nota < 6) {
+                console.log("aprobado raspado");
+            } else if (nota < 8) {
+                console.log("aprobado con buena nota");
+            } else if (nota < 10) {
+                console.log("aprobado con muy buena nota");
+            } else {
+                console.log("perfecto");
+            }
+        } else {
+            console.log("algo no me cuadra");
+        }
+
+        var casoEvaluar = "A";
+        switch (casoEvaluar) {
+            case "1":
+                console.log("Ejecución por el caso 1");
+
+                break;
+            case 2:
+                console.log("Ejecución por el caso 2");
+                break;
+            case 3:
+                console.log("Ejecución por el caso 3");
+                break;
+            case 4:
+                console.log("Ejecución por el caso 4");
+                break;
+
+            default:
+                console.log("Ejecución no contemplada");
+                break;
+        }
+
+        var decision = true;
+        decision
+            ?
+            console.log("la decición ha sido verdadera") :
+            console.log("la decición ha sido falsa");
+
+        /*var nombre = prompt('Por favor introduce tu nombre');
+            nombre.length > 5 ? alert("tu nombre es demasiado largo") : alert("tu nombre es cumple con los requisitos de longitud")*/
+
+        /*var numero = 10;
+            while (numero > 0) {
+                alert(`El número es demasiado grande aún, su valor es de ${numero}`);
+                numero--;
+            }*/
+
+        numeroWhile = 10;
+        do {
+            console.log(numeroWhile);
+            numeroWhile--;
+        } while (numeroWhile >= 0);
+
+        for (let index = 0; index < 10; index++) {
+            console.log(index);
+        }
+
+        console.log('recorrido con foreach');
+
+        elementos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+        elementos.forEach(element => {
+            console.log(element);
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        fecha = new Date();
+        console.log(fecha);
+
+        // datos de una fecha
+        var ahora = new Date();
+        console.log("Con UTC: ");
+        console.log("==== FECHA ====");
+        console.log("El año: " + ahora.getUTCFullYear());
+        console.log("El mes: " + ahora.getUTCDate());
+        console.log("El día de la semana: " + ahora.getUTCDay()); // 0 - 6 (D - S)
+        console.log("El día del mes: " + ahora.getUTCDate()); // 1-31
+        console.log("==== HORA ====");
+        console.log("Horas: " + ahora.getUTCHours());
+        console.log("Minutos: " + ahora.getUTCMinutes());
+        console.log("Segundos: " + ahora.getUTCSeconds());
+        console.log("milisegundos: " + ahora.getUTCMilliseconds());
+
+        // modificación de fechas
+        var fechaNueva = new Date();
+        fechaNueva.setMonth(fechaNueva.getMonth() - 1);
+        console.log(fechaNueva.toUTCString());
+
+        // toString de fechas
+        var fechaString = new Date();
+        console.log(fechaString.toUTCString());
+        console.log(fechaString.toISOString());
+
+        var ahoraString = new Date();
+        ahora.toString();
+        ahora.toDateString();
+        ahora.toTimeString();
+
+        // cantidad de tiempo transurrido
+
+        console.time("El tiempo empleado es")
+        var incremento = 1;
+        for (let index = 0; index < 5; index++) {
+            incremento = Math.pow(index, incremento);
+        }
+
+        console.timeEnd("El tiempo empleado es");
+        console.log(`El incremento final es:`);
+    </script>
+</body>
+
+</html>

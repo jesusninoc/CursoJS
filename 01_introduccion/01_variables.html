@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var variable = "Hola";
+        console.log(variable);
+        console.log(typeof variable);
+        variable = 2;
+        console.log(variable);
+        console.log(typeof variable);
+
+        var numero1 = 24;
+        var numero2 = 31.5;
+        var suma = numero1 + numero2;
+        var sumaDos = numero1.toString() + numero2.toString();
+        console.log("la suma es " + parseInt(suma));
+        console.log("la suma es " + sumaDos);
+
+
+        var fraseCompleja = new String("Ejemplo de frase compleja");
+        console.log(fraseCompleja.toUpperCase());
+        console.log(typeof fraseCompleja);
+        var fraseNormal = "Ejemplo de frase normal";
+        console.log(fraseNormal.toUpperCase());
+        console.log(typeof fraseNormal);
+
+        console.log(
+            "en el caso de querer saltos de linea \n se utilizan carácteres especiales"
+        );
+
+        console.log("Mi nombre es " + "Borja" + " y tengo " + 18 + " años");
+        var nombre = "Borja";
+        var edad = 18;
+        console.log("Mi nombre es " + nombre + " y tengo " + edad + "años");
+        console.log(`Mi nombre es ${nombre} y tengo ${edad} años`);
+        console.log(
+            "%c Mi nombre es %s y tengo %d años",
+            "background: #3EBDFF;",
+            nombre,
+            edad
+        );
+
+        var palabra = "Alumno";
+        var letra = "A";
+        console.assert(0 > 8);
+        console.assert(palabra.includes(letra));
+
+        //console.group("menasaje uno", "mensaje dos", "mensaje tres");
+        //console.groupCollapsed("menasaje uno", "mensaje dos", "mensaje tres");
+
+        console.time("Tiempo");
+        for (let index = 0; index < 300; index++) {
+            console.log("elemento");
+        }
+        console.timeEnd("Tiempo");
+
+        var confirmacion = confirm(
+            "¿estás seguro que quieres terminar el proceso?"
+        );
+
+        /*if (confirmacion) {
+              alert("El proceso se ha terminado");
+          }*/
+        /*var nombreIntroducido = prompt("por favor introduce tu nombre");
+          var respuesta = confirm(`¿Estás seguro que quieres evaluar el nombre ${nombreIntroducido}?`);
+          if (respuesta) {
+              tieneAes = nombreIntroducido.toLowerCase().includes('a')
+              if (tieneAes) {
+                  alert('El nombre introducido tiene alguna a')
+              } else {
+                  alert('El nombre introducido no tiene ninguna a')
+              }
+          } else {
+              alert('Proceso terminado');
+          }*/
+
+        console.log(`El valor es`);
+
+        var igual = 100 == "100";
+        console.log(`El valor es ${igual}`);
+        var igualDiferente = 100 === "100";
+        console.log(`El valor es ${igualDiferente}`);
+
+        // diferencias entre let - var y const
+
+        var variable = "Valor inicial";
+        console.log(variable);
+        if (true) {
+            variable = "Valor cambiado en el bloque ";
+            console.log(variable);
+        }
+        variable = "Valor cambiado fuera del bloque";
+        console.log(variable);
+
+        var variable = "Valor con var";
+        if (true) {
+            let variable = "Valor con let";
+            console.log(variable);
+        }
+        console.log(variable);
+    </script>
+</body>
+
+</html>

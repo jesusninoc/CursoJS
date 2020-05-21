@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var cadena = "Ejemplo de cadena de texto";
+        console.log(`La cadena de texto tiene una longitud de ${cadena.length}`);
+
+        cadena = "Texto para Pasar a mayúsculas";
+        console.log(cadena.toUpperCase());
+        cadena = "TEXTO PARA PASAR A MINÚCULA";
+        console.log(cadena.toLowerCase());
+
+        cadena = "Texto para Pasar a mayúsculas";
+        console.log('La letra de la posicion 0 es ' + cadena.charAt(0));
+
+        cadena = "Sacar códigos asci de letras";
+        console.log(`El código de la letra ${cadena.charAt(0)} es ${cadena.charCodeAt(0)}`);
+
+        cadena = "Primera parte de la cadena completa ";
+        cadena2 = "segunda parte de la cadena completa";
+
+        cadena = cadena.concat(cadena2, " tercera parte", "\n", " cuarta parte");
+        console.log(cadena);
+
+        cadena = "Buscar la posición de una letra";
+        letra = 'a';
+        console.log(`la posición de la letra ${letra} es ${cadena.indexOf(letra)}`);
+
+        cadena = "     Frase con espacios      ";
+        cadena = cadena.trim();
+        console.log(cadena);
+
+        cadena = "Sacar partes de la cadena";
+        console.log(cadena.substr(0, 5));
+
+        cadena = "Esto es una frase que tiene unas cuantas palabras"
+        palabras = cadena.split(' ');
+        console.log(`El número de palabras que tiene la cadena de texto metida es ${palabras.length} `);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <title>Ejemplo incrustar y modificar HTML con JS</title>
+    <style>
+        .maniana {
+            background-color: aqua;
+        }
+        
+        .tarde {
+            background-color: orange;
+        }
+        
+        .noche {
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>
+            Existen dos formas de incluir código javascript en una web. La primera es directemente mediante una etiqueta script
+        </p>
+
+        <!-- cuidado que la etiqueta tiene que estar declarada ante para que pueda ser encontrada -->
+        <p id="salida"></p>
+
+        <script type="text/javascript">
+            const variable = "Esto es un ejemplo de código js incrustado";
+            document.getElementById("salida").innerHTML = variable;
+        </script>
+        <p id="externo"></p>
+        <script type="text/javascript" src="scripts/intro/externo.js"></script>
+
+        <p>Esto es un saludo personalizado dependiendo de la hora del dia</p>
+
+        <p id="saludo" class="manania"></p>
+        <img id="cara_dia">
+
+    </div>
+
+
+    <script type="text/javascript" src="scripts/intro/saludo_fecha.js"></script>
+    <script type="text/javascript" src="scripts/intro/saludo_cara.js"></script>
+</body>
+
+</html>

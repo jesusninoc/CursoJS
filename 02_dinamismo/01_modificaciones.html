@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(history.length);
+        //console.log(history.back());
+        console.log(window.navigator.appName);
+        console.log(window.navigator.appVersion);
+        var enlace = document.createElement("a");
+        enlace.href = "https://github.com/DevelopSys";
+        console.log("href:", enlace.href);
+        console.log("protocol:", enlace.protocol);
+        console.log("host:", enlace.host);
+        console.log("hostname:", enlace.hostname);
+        console.log("port:", enlace.port);
+        console.log("pathname:", enlace.pathname);
+        console.log("search:", enlace.search);
+        console.log("hash:", enlace.hash);
+        console.log("origin:", enlace.origin);
+
+        var web = prompt(
+            "Por favor introduce el nombre de la web que quieres visitar"
+        );
+
+        console.log(web.indexOf('.'));
+        console.log(web.length)
+
+        if (web.length === 0 || web.indexOf('.') === 0) {
+            alert("No se ha introducido una dirección valida");
+        } else {
+            setTimeout(function() {
+                console.log(`https:\\${web}`);
+
+                document.location.assign(`https:\\${web}`);
+            }, 2000);
+            alert('La página se cargargará en 3 segundos')
+        }
+    </script>
+</body>
+
+</html>

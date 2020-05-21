@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function name(params) {}
+
+        var miFuncion = function name(params) {};
+
+        function funcionInicial() {
+            console.log("Llamada la funcion inicial");
+        }
+
+        var variableFuncion = function fVariable() {
+            console.log("Llamada la variable que ejecuta la función");
+        };
+
+        funcionInicial();
+        variableFuncion();
+
+        function suma(operando1, operando2) {
+            var suma = operando1 + operando2;
+            console.log(
+                `La suma de los dos parámetos pasados a la función es de: ${suma}`
+            );
+            console.log(`La suma de ${operando1} y ${operando2} es de: ${suma}`);
+        }
+
+        function suma(operando1, operando2, operando3) {
+            var suma = operando1 + operando2 + operando3;
+            console.log(
+                `La suma de los dos parámetos pasados a la función es de: ${suma}`
+            );
+            console.log(`La suma de ${operando1} y ${operando2} es de: ${suma}`);
+            console.log(
+                `La suma de ${operando1} y ${operando2} y ${operando3} es de: ${suma}`
+            );
+        }
+
+        suma(2);
+        suma(2, 6);
+        suma(2, 3, 7);
+
+        function parametorsOpcionales(parametroUno, parametroDos) {
+            parametroDos = parametroDos || "valor por defecto";
+            console.log(
+                `Los parámetos pasados por funcion son ${parametroUno} y ${parametroDos}`
+            );
+        }
+
+        parametorsOpcionales(1);
+        parametorsOpcionales(1, "ejemplo");
+
+        function sumaOptativa(a, b) {
+            if (typeof b === "undefined") {
+                b = 0;
+            }
+            var suma = a + b;
+            console.log(`La suma de ${a} y ${b} es de: ${suma}`);
+        }
+        sumaOptativa(1, 5);
+        sumaOptativa(5);
+
+        function sumaRetorno(operando1, operando2) {
+            return operando1 + operando2;
+        }
+        console.log(
+            "El resultado de llamar a la función es: " + sumaRetorno(4, 5)
+        );
+
+        function argumentosInvisibles() {
+            console.log(
+                "La función ha sido llamada con " +
+                arguments.length +
+                "y son los siguientes"
+            );
+            for (let index = 0; index < arguments.length; index++) {
+                const element = arguments[index];
+                console.log(element);
+            }
+        }
+
+        argumentosInvisibles(1, "llamada", false, 3.14);
+
+        function primeraFuncion() {
+            console.log("Tarea iniciada");
+            console.log("Este es el primer subproceso");
+            return segundaFuncion();
+        }
+
+        function segundaFuncion() {
+            console.log("Este es el segundo subproceso");
+            console.log('Tarea terminada');
+
+        }
+        primeraFuncion();
+
+        var funcionAnonima = function(parametro) {
+            console.log(`El parámetro de la función anónima es ${parametro}`);
+        }
+
+        funcionAnonima('Hola');
+
+        function retornaFuncion() {
+            return function() {
+                console.log('Rotoranada una función anónima');
+            }
+        }
+        retornaFuncion();
+
+
+        /*function primeraAsincrona() {
+            setTimeout(function() {
+                console.log('ejecucion realizada');
+            }, 1000);
+        }
+        console.log('Llamada a la función asíncrona');
+        primeraAsincrona();
+        console.log('Llamada de cualquier cosa');*/
+
+        function traerDatos(callback) {
+            setTimeout(function() {
+                console.log('Durante esta ejecución se han traido una serie de datos');
+                var dato = 'datos traidos';
+                callback(dato);
+            }, 2000);
+        }
+
+        function pintarDatos(param) {
+            console.log('Durante la ejecución de esta función los datos son puntados: ' + param);
+        }
+
+        traerDatos(pintarDatos);
+    </script>
+</body>
+
+</html>

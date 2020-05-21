@@ -1,0 +1,15 @@
+1. que es javascript
+como meter código de javascript en un documento
+	- mediante etiqueta <script>
+	- mediante fichero <script src>
+modificar el contenido de una etiqueta document.getElementById().innerHTML = "lo que sea" 
+modificar el estilo de una etiqueta document.getElementById().className = 
+
+ejemplo básico de un saludo modificado según la hora del dia. Para ello se explica:
+- el funcionamiento de las variables, como se accede a ellas 
+- el funcionamiento de del bloque de contro if con los comparadores de < >
+
+2. Explicar el uso de cadenas y el acceso a cualquier propiedad de los elementos desde su id
+modificar el ejemplo anterior para que en un nuevo script se ponga una carita dependiende del valor de del día. Para ello shay que explicar:
+- el uso de la sentencia switch
+- el uso de la concatenacion con `${}` o simplemente con +
