@@ -1,6 +1,12 @@
 
 ##  if, prompt, alert 
 
+1. Ejercicio 2: escribe un programa en JavaScript que realice las siguientes tareas:
+
+	-   Mostrar por pantalla la expresión "Hola Mundo".
+	-   Mostrar por pantalla la expresión 5*5 como texto.
+	- Mostrar por pantalla el resultado de la expresión 5*5.
+
 1. Determine si un número introducido en un Prompt es par o no, la respuesta será mostrada en una alerta.
 
 2. Pedir al usuario un nombre y una letra en prompts diferentes. Una vez metido esto saltará una alerta indicando si el nombre contiene la letra. En caso de ser positivo también dirá el número de letras que tiene
