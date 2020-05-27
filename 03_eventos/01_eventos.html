@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Formulario de introducción de datos</h1>
+
+    <form id="formulario">
+        <input type="text" inputmode="latin" id="nombre" placeholder="introduce tu nombre" />
+        <input type="text" inputmode="latin" id="apellido" placeholder="introduce tu apellido" />
+        <input type="date" id="fecha" />
+
+        <button type="button" onclick="saludar(nombre.value, apellido.value,fecha.value)" id="boton">
+        Pulsar para enviar
+      </button>
+    </form>
+
+    <h1>Formulario de introducción de datos</h1>
+
+    <form id="formulario_calc">
+        <input type="number" id="op1" />
+        <input type="number" id="op2" />
+        <input type="radio" id="suma" name="operacion" value="1" />
+        <label for="suma">Suma</label>
+        <input type="radio" id="resta" name="operacion" value="2" />
+        <label for="resta">Resta</label>
+        <input type="radio" id="multiplicacion" name="operacion" value="3" />
+        <label for="multiplicacion">Multiplicación</label>
+        <input type="radio" id="division" name="operacion" value="4" />
+        <label for="division">División</label>
+        <button type="button" onclick="realizarCalculo(op1.value, op2.value)" id="boton_calc">
+        calcular
+      </button>
+    </form>
+
+    <p id="parrafo_destino"></p>
+
+    <button id='botonListener'>Evento desde código</button>
+
+</body>
+
+<script>
+    function realizarCalculo(op1, op2) {
+        operacion = document.querySelector('input[name="operacion "]:checked').value;
+        var resultado;
+        switch (parseInt(operacion)) {
+            case 1:
+                resultado = parseInt(op1) + parseInt(op2);
+                console.log('entra');
+
+                break;
+            case 2:
+                resultado = op1 - op2;
+                break;
+            case 3:
+                resultado = op1 * op2;
+
+                break;
+            case 4:
+                resultado = op1 / op2;
+                break;
+        }
+
+        console.log(resultado);
+
+        console.log(`El resultado de realizar la suma es ${resultado}`);
+        parrafo = document.getElementById('parrafo_destino').innerHTML = `El resultado de realizar la suma es ${resultado}`;
+    }
+
+    function saludar(nombre, apellido, fecha) {
+        fecha = new Date(fecha);
+        fecha.getYear();
+        console.log(
+            `Hola ${nombre} ${apellido}, naciste el ${fecha.getDate()}/${
+          fecha.getMonth() + 1
+        }/${fecha.getFullYear()}`
+        );
+    }
+
+    let elemento = document.querySelector('#botonListener');
+    console.log(elemento);
+    elemento.addEventListener('click', pulsarBoton);
+
+    function pulsarBoton() {
+        console.log('pulsación realizada');
+        let elementoTexto = document.createTextNode('Texto a poner en el nuevo elemento');
+        document.querySelector('#parrafo_destino').appendChild(elementoTexto);
+        //elemento.style.cursor = 'grabbing';
+        //elemento.style.cursor = 'grab';
+        //console.log(elemento);
+    }
+
+    //elemento.removeEventListener('click', pulsarBoton);
+
+    elemento.style.fontSize = '10px';
+    elemento.addEventListener('mouseover', function() {
+        console.log('El ratón está por encima del elemento');
+        elemento.style.fontSize = '20px';
+        elemento.style.cursor = 'pointer';
+
+    });
+
+    elemento.addEventListener('mouseout', function() {
+        elemento.style.fontSize = '10px';
+        console.log('El ratón está por fuera del elemento');
+        elemento.style.cursor = 'default';
+    });
+
+    let elementoPulsado = document.querySelector('#botonListener');
+    console.log(elementoPulsado);
+
+    window.addEventListener('load', function() {
+        console.log('HTML cargado completo');
+    })
+</script>
+
+</html>

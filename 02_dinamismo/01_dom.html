@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="titulo">Titulo propio impartido en el CES Juan Pablo II</h1>
+    <p id="parrafo_general">
+        Este título propio será impartido para los alumnos del ciclo de Desarrollo de Aplicaciones Multiplataforma de CES JuanPablo II. La finalidad de este curso es sentar las bases del lenguaje de programación web JavaScrip de forma que se puedan hacer Aplicaciones
+        web dinámicas
+    </p>
+
+    <p>El contenido del curso será</p>
+
+    <ul id="lista_contenido" class="class_lista">
+        <li>1. Introducción</li>
+        <li>2. DOM y BOM</li>
+        <li>3. Gestión de eventos</li>
+        <li>4. Almacenamiento interno</li>
+    </ul>
+
+    <p>Los link en los que se basa el curso son los:</p>
+    <ul>
+        <li><a href="https://github.com/DevelopSys/CursoJS">Repositorio DevSys</a></li>
+        <li><a href="https://classroom.google.com/">Classroom</a></li>
+        <li><a href="http://www.developandsys.es">Develop and system</a></li>
+    </ul>
+
+    <script>
+        var listaPorId = document.getElementById("lista_contenido");
+        var listaPorTag = document.getElementsByTagName("ul");
+        var listaPorClass = document.getElementsByClassName("class_lista");
+
+        console.log(listaPorId);
+        console.log(listaPorTag);
+        console.log(listaPorClass);
+        console.log(listaPorId);
+
+        var lista = document.getElementsByTagName("ul")[0].children;
+        for (let index = 0; index < lista.length; index++) {
+            const element = lista[index];
+            console.log(element.innerHTML);
+        }
+
+        var links = document.links;
+        for (let index = 0; index < links.length; index++) {
+            const element = links[index];
+            console.log(element.href);
+
+        }
+    </script>
+</body>
+
+</html>

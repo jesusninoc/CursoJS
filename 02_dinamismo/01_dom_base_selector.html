@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/estilos.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Titulo de JS impartido por Borja Martín</h1>
+    <p class="mi_parrafo">
+        Titulo correspondiente al primer curso de DAM del instituto CES Juan Pablo segundo de Formación profesional
+    </p>
+    <div id="mi_div">
+        Parrafo diferente
+        <div class="elemento_interno"></div>
+        <div class="elemento_interno_dos"></div>
+    </div>
+    <script>
+        "use strict";
+        let elementoPorClass = document.querySelector(".mi_parrafo");
+        console.log(elementoPorClass);
+        let elementoPorId = document.querySelector("#mi_div");
+        console.log(elementoPorId);
+        let elementoAnidado = document.querySelector("#mi_div div");
+        console.log('elemento anidado');
+
+        console.log(elementoAnidado);
+        let elementoAnidadoConcreto = document.querySelector(
+            "#mi_div .elemento_interno_dos"
+        );
+        console.log(elementoAnidadoConcreto);
+
+        let elementosComunes = document.querySelectorAll("#mi_div div");
+        console.log(elementosComunes);
+        console.log(elementosComunes[0]);
+        elementosComunes[0].innerHTML = 'Texto modificado del primero'
+
+
+        function modificarContenido(elemento) {
+            elemento.innerHTML = 'modificaion'
+        }
+
+        function modificarTodosPorSelector(query) {
+
+            let elementos = document.querySelectorAll(query);
+            elementos.forEach(element => {
+                console.log(element);
+                let parrafo = document.createElement('p');
+                let texto = document.createTextNode('Ejemplo de modificacion');
+                parrafo.appendChild(texto);
+                element.appendChild(parrafo);
+            });
+        }
+    </script>
+</body>
+
+</html>
