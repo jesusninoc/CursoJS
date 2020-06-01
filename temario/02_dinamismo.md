@@ -396,6 +396,7 @@ Adicionalmente, la parte de location también tiene una serie de métodos intere
 1. .assign(): permite cargar una nueva página en el navegador
 2. .reload(): permite recargar la página actual 
 3. .replace(): permite cargar una nueva página en el navegador sustituyendo a la que está en el historial
+4. open(): permite abrir una nueva ventana con un parámetro determinado, un modo de apertura y unas propiedades
 
 ## Eventos
 
@@ -697,6 +698,29 @@ Al igual que se ha definido en el ejemplo un evento de tipo click, se pueden aso
 
     });
 ````
+
+Una cosa importante cuando se trabaja con eventos es que las funciones que se ejecutan pueden recibir tántos parámetros como sean necesarios tal y como se vió cuando creamos las funciones, pero a la hora de trabajar con eventos lo normal es que reciban un parámetro de tipo event  donde se puede encontrar toda la información del evento asociado. Suponer que se tiene un botón al que se le quiere dar una funcionalidad concreta;
+
+````
+    let boton = document
+        .querySelector("#boton_evento_funcion")
+        .addEventListener("click", function(event) {
+            console.log(event);
+        });
+````
+
+En este caso la función de callback recibe como parámetro un objeto que representa toda la información del evento producido: Si ejecutamos el código se puede ver que se muestran todos los parámetros que el evento produce, pudiendo acceder a cualquiera de ellos
+
+Esta técnica se puede realiza con cualquier elemento. Por ejemplo si se quiere sacar la tecla pulsada en un input se puede utilizar la funcionalidad basada en un evento de tipo keyup
+
+``
+    let input = document
+        .querySelector("#input_funcion")
+        .addEventListener("keyup", function(event) {
+                console.log(event);
+                console.log(String.fromCharCode(event.KeyCode));}
+``
+
 
 Cuando se trabaja con js el orden de carga es muy importante. Esto quiere decir que si nosotros ejecutamos un script antes de los elementos HTML (en el head por ejemplo) puede que muchos de los elementos que intervienen en el código no se encuentran al no haberse cargado
 

@@ -24,23 +24,25 @@
                         <th id="numero"><button value="1">1</button></th>
                         <th id="numero"><button>2</button></th>
                         <th id="numero"><button>3</button></th>
+                        <th id="operacion_b"><button>CE</button></th>
                     </tr>
                     <tr>
                         <th id="numero"><button>4</button></th>
                         <th id="numero"><button>5</button></th>
                         <th id="numero"><button>6</button></th>
+                        <th id="operacion_b"><button>C</button></th>
                     </tr>
                     <tr>
                         <th id="numero"><button>7</button></th>
                         <th id="numero"><button>8</button></th>
                         <th id="numero"><button>9</button></th>
+                        <th><button id="operacion" value="igual">=</button></th>
                     </tr>
                     <tr>
                         <th><button id="operacion" value="suma">+</button></th>
                         <th><button id="operacion" value="resta">-</button></th>
                         <th><button id="operacion" value="multiplicacion">*</button></th>
                         <th><button id="operacion" value="division">/</button></th>
-                        <th><button id="operacion" value="igual">=</button></th>
                     </tr>
                 </table>
             </div>
@@ -48,8 +50,7 @@
 
         <div style="float: left; width: 50%;">
             <h1>Operaciones realizadas</h1>
-            <ul>
-                <li>Operacion 1</li>
+            <ul id='lista_operaciones'>
             </ul>
         </div>
     </div>
@@ -61,14 +62,15 @@
     let tipoOperacion;
     let botones = document.querySelectorAll("table #numero");
     let botonesOperacion = document.querySelectorAll("table #operacion");
+    let operaciones = ['+', '-', '*', '/'];
     console.log(botones);
 
     let pantalla = document.querySelector("#operaciones");
     pantalla.style.width = "500px";
 
     botones.forEach((element) => {
-        element.style.width = "100%";
-        element.style.height = "100%";
+        //element.style.width = "100%";
+        //element.style.height = "100%";
         element.addEventListener("click", function() {
             pantalla.value = pantalla.value + element.textContent;
         });
@@ -76,51 +78,65 @@
 
     botonesOperacion.forEach((element) => {
         element.addEventListener("click", function() {
-            if (pantalla.value === "igual") {
+            if (element.value === "igual") {
                 operando2 = pantalla.value;
                 console.log(estoyOperando);
 
                 if (estoyOperando) {
+                    operando2 = pantalla.value;
+                    console.log(operando2);
+
                     switch (tipoOperacion) {
                         case 1:
-                            pantalla.value = operando1 + operando2;
+                            pantalla.value = parseInt(operando1) + parseInt(operando2);
                             break;
                         case 2:
-                            pantalla.value = operando1 - operando2;
+                            pantalla.value = parseInt(operando1) - parseInt(operando2);
                             break;
                         case 3:
-                            pantalla.value = operando1 * operando2;
+                            pantalla.value = parseInt(operando1) * parseInt(operando2);
                             break;
                         case 4:
-                            pantalla.value = operando1 / operando2;
+                            pantalla.value = parseInt(operando1) / parseInt(operando2);
                             break;
-
                     }
+
+
                     estoyOperando = !estoyOperando;
+                    console.log(estoyOperando);
+                    let lista = document.querySelector('#lista_operaciones');
+                    console.log(lista);
+                    let elemento = document.createElement('li');
+                    elemento.appendChild(document.createTextNode(`${operando1} ${operaciones[tipoOperacion-1]} ${operando2} = ${pantalla.value}`))
+                    lista.appendChild(elemento);
+
+
                 }
             } else {
                 switch (element.value) {
-                    case 'suma':
+                    case "suma":
                         tipoOperacion = 1;
-                        break
-                    case 'resta':
+                        console.log("pulsado suma");
+                        break;
+                    case "resta":
                         tipoOperacion = 2;
-                        break
-                    case 'multiplicacion':
+                        break;
+                    case "multiplicacion":
                         tipoOperacion = 3;
-                        break
-                    case 'division':
+                        break;
+                    case "division":
                         tipoOperacion = 4;
-                        break
+                        break;
                 }
 
                 if (!estoyOperando) {
                     estoyOperando = !estoyOperando;
                     operando1 = pantalla.value;
-                    pantalla.value = null
+                    pantalla.value = null;
+                    console.log(operando1);
+                    console.log(estoyOperando);
                 }
                 //                console.log(estoyOperando);
-
             }
         });
     });

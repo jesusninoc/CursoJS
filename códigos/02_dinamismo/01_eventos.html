@@ -40,18 +40,21 @@
 
     <p id="parrafo_destino"></p>
 
-    <button id='botonListener'>Evento desde código</button>
+    <button id="botonListener">Evento desde código</button>
 
+    <button id="boton_evento_funcion">Pulsar</button>
+    <input id="input_funcion" type="text" placeholder="introduce algun elemento" />
 </body>
 
 <script>
     function realizarCalculo(op1, op2) {
-        operacion = document.querySelector('input[name="operacion "]:checked').value;
+        operacion = document.querySelector('input[name="operacion "]:checked')
+            .value;
         var resultado;
         switch (parseInt(operacion)) {
             case 1:
                 resultado = parseInt(op1) + parseInt(op2);
-                console.log('entra');
+                console.log("entra");
 
                 break;
             case 2:
@@ -69,7 +72,9 @@
         console.log(resultado);
 
         console.log(`El resultado de realizar la suma es ${resultado}`);
-        parrafo = document.getElementById('parrafo_destino').innerHTML = `El resultado de realizar la suma es ${resultado}`;
+        parrafo = document.getElementById(
+            "parrafo_destino"
+        ).innerHTML = `El resultado de realizar la suma es ${resultado}`;
     }
 
     function saludar(nombre, apellido, fecha) {
@@ -82,14 +87,16 @@
         );
     }
 
-    let elemento = document.querySelector('#botonListener');
+    let elemento = document.querySelector("#botonListener");
     console.log(elemento);
-    elemento.addEventListener('click', pulsarBoton);
+    elemento.addEventListener("click", pulsarBoton);
 
     function pulsarBoton() {
-        console.log('pulsación realizada');
-        let elementoTexto = document.createTextNode('Texto a poner en el nuevo elemento');
-        document.querySelector('#parrafo_destino').appendChild(elementoTexto);
+        console.log("pulsación realizada");
+        let elementoTexto = document.createTextNode(
+            "Texto a poner en el nuevo elemento"
+        );
+        document.querySelector("#parrafo_destino").appendChild(elementoTexto);
         //elemento.style.cursor = 'grabbing';
         //elemento.style.cursor = 'grab';
         //console.log(elemento);
@@ -97,26 +104,37 @@
 
     //elemento.removeEventListener('click', pulsarBoton);
 
-    elemento.style.fontSize = '10px';
-    elemento.addEventListener('mouseover', function() {
-        console.log('El ratón está por encima del elemento');
-        elemento.style.fontSize = '20px';
-        elemento.style.cursor = 'pointer';
-
+    elemento.style.fontSize = "10px";
+    elemento.addEventListener("mouseover", function() {
+        console.log("El ratón está por encima del elemento");
+        elemento.style.fontSize = "20px";
+        elemento.style.cursor = "pointer";
     });
 
-    elemento.addEventListener('mouseout', function() {
-        elemento.style.fontSize = '10px';
-        console.log('El ratón está por fuera del elemento');
-        elemento.style.cursor = 'default';
+    elemento.addEventListener("mouseout", function() {
+        elemento.style.fontSize = "10px";
+        console.log("El ratón está por fuera del elemento");
+        elemento.style.cursor = "default";
     });
 
-    let elementoPulsado = document.querySelector('#botonListener');
+    let elementoPulsado = document.querySelector("#botonListener");
     console.log(elementoPulsado);
 
-    window.addEventListener('load', function() {
-        console.log('HTML cargado completo');
-    })
+    window.addEventListener("load", function() {
+        console.log("HTML cargado completo");
+    });
+
+    let boton = document
+        .querySelector("#boton_evento_funcion")
+        .addEventListener("click", function(event) {
+            console.log(event);
+        });
+
+    let input = document
+        .querySelector("#input_funcion")
+        .addEventListener("keyup", function(event) {
+                console.log(event);
+                console.log(String.fromCharCode(event.KeyCode));
 </script>
 
 </html>

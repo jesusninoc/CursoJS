@@ -6,6 +6,6 @@
 
 3. Usando un input de tipo date, permitir seleccionar una fecha, y que el color de fondo que hay en la página cambien para indicar la estación del año de la fecha
 
-3. Realiza una aplicación web que simule el funcionamiento de una aplicación 
+3. Realiza una aplicación web que simule el funcionamiento de una calculadora. En la parte de la izquierda aparecerá la interfaz de la calculadora con las operaciones + - * / = y una tecla para borrar. En la parte de la derecha aparecerá una lista con todas las operaciones realizadas, donde se irán agregando cada vez que se pulsa el =
 
 4. Un conversor de pesos, medidas y/o temperaturas. Se debería poder ingresar valor en un input (por ejemplo dólar) y que se actualicen los demás inputs (por ejemplo peso)
