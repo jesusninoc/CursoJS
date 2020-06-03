@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="Introduce nombre" id="nombre" />
+        <input type="text" placeholder="Introduce apellido" id="apellido" />
+        <input type="number" placeholder="Introduce edad" min="18" id="edad" />
+        <button type="button" id="boton">Registrar</button>
+    </form>
+
+    <button type="button" id="botonObtener">Obtener elementos</button>
+
+    <p id='parrafoElementos'>
+
+    </p>
+
+    <script>
+        "use strict";
+        /*if (typeof Storage != null) {
+                console.log("disponnible");
+            }*/
+        let nombre = document.querySelector("#nombre");
+        let apellido = document.querySelector("#apellido");
+        let edad = document.querySelector("#edad");
+        let usuario;
+        let usuarios = [];
+
+        localStorage.setItem("titulo", "ejemplo");
+        localStorage.setItem("palabra", "ejemplo");
+        localStorage.setItem("numero", 22);
+        localStorage.setItem("boolean", false);
+        let array = ["elemento", 1, false];
+        let objeto = {
+            nombre: "Borja",
+            apellido: "Martín",
+            edad: 18
+        };
+        localStorage.setItem("array", array);
+        localStorage.setItem("objeto", JSON.stringify(objeto));
+
+        console.log(typeof(localStorage.getItem("palabra")));
+        console.log(typeof(localStorage.getItem("numero")));
+        console.log(typeof(localStorage.getItem("boolean")));
+        console.log(typeof(localStorage.getItem("array")));
+        console.log(typeof(localStorage.getItem("objeto")));
+
+        localStorage.setItem("numero1", 1);
+        localStorage.setItem("numero2", 2);
+        localStorage.setItem("numero3", 3);
+
+        let suma = parseInt(localStorage.getItem('numero1')) + parseInt(localStorage.getItem('numero2')) + parseInt(localStorage.getItem('numero3'));
+        console.log(suma);
+
+
+        console.log(JSON.parse(localStorage.getItem("objeto")));
+
+
+
+
+
+
+
+
+        //console.log(localStorage.getItem("titulo"));
+
+        document.querySelector("#boton").addEventListener("click", function() {
+            if (
+                nombre.value.length > 0 &&
+                apellido.value.length > 0 &&
+                edad.value.length > 0
+            ) {
+                usuario = {
+                    nombre: nombre.value,
+                    apellido: apellido.value,
+                    edad: edad.value,
+                };
+                usuarios.push(usuario);
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            }
+        });
+
+        document.querySelector("#botonObtener").addEventListener("click", function() {
+
+            let usuariosStorage = localStorage.getItem('usuarios');
+            console.log(usuariosStorage);
+
+            if (usuariosStorage != null) {
+                console.log(usuariosStorage);
+                console.log(JSON.parse(localStorage.getItem('usuarios')));
+
+                /*usuariosStorage.forEach(element => {
+                    let nodo = document.createTextNode(element)
+                    document.querySelector('#parrafoElementos').append(nodo);
+                });*/
+            } else {
+                alert('No hay usuarios guardados')
+            }
+
+        });
+    </script>
+</body>
+
+</html>

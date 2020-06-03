@@ -304,7 +304,7 @@ Si se quiere acceder a todos los elementos mediante una función:
 ````
 
 Imaginad ahora que se quiere agregar algún elemento a todos los divs que se ha devuelvo en la consulta del selector. Para ello, en cada uno de los elementos de la colección se crea un nuevo nodo y se agrega al existente
-∫∫∫
+
 ````
         function modificarTodosPorSelector(query) {
 
@@ -319,84 +319,6 @@ Imaginad ahora que se quiere agregar algún elemento a todos los divs que se ha 
         }
 ````
 
-
-## Trabajar con el BOM
-
-Como se ha dicho, el BOM representa el acceso a información por parte del lenguaje de la capa por la cual se accede a la aplicación web: el navegador. Dentro de este BOM existen multitud de componentes, entre los cuales se encuentra:
-
-- window.history: permite acceder a la información del navegador desde el que se visita la web. Sus principales elementos son
-1. La propiedad length: que indica cuantas páginas se han visitado
-2. Los métodos go, back y forward
-
-````
-        console.log(history.length);
-        console.log(history.back());
-        console.log(history.go(1));
-        console.log(history.forward);
-````
-
-- window.navigator: permite acceder a información del cliente utilizado para acceder a la web. Alguno de sus métodos más utilizados son:
-
-````
-        console.log("appCodeName:", window.navigator.appCodeName);
-        console.log("appName:", window.navigator.appName);
-        console.log("appVersion:", window.navigator.appVersion);
-        console.log("platform:", window.navigator.platform);
-        console.log("product:", window.navigator.product);
-        console.log("userAgent:", window.navigator.userAgent);
-        console.log("javaEnabled:", window.navigator.javaEnabled());
-        console.log("language (used):", window.navigator.language);
-        console.log("language (support):", window.navigator.languages);
-        console.log("conectado a internet?", window.navigator.onLine);
-        console.log("mimeTypes:",window.navigator.mimeTypes);
-        console.log("Plugins:", navigator.plugins);
-````
-
-En el caso de utilizar un navegador en un dispositivo movil, se pueden ejecutar algún método adicional como 
-
-````
-        navigator.getBattery()
-        navigator.vibrate()
-````
-
-- window.screen: permite acceder a información sobre la pantalla del dispositivo 
-
-````
-        console.log("availTop:", window.screen.availTop);
-        console.log("availLeft:", window.screen.availLeft);
-        console.log("availHeight:", window.screen.availHeight);
-        console.log("availWidth:", window.screen.availWidth);
-        console.log("colorDepth:", window.screen.colorDepth);
-        console.log("height:", window.screen.height);
-        console.log("left:", window.screen.left);
-        console.log("orientation:", window.screen.orientation);
-        console.log("pixelDepth:", window.screen.pixelDepth);
-        console.log("top:", window.screen.top);
-        console.log("width:", window.screen.width);
-````
-
-- window.location: permite acceder a información sobre enlaces y/o webs
-
-````
-        var enlace = document.createElement("a");
-        enlace.href = "https://github.com/DevelopSys";
-        console.log("href:", enlace.href);
-        console.log("protocol:", enlace.protocol);
-        console.log("host:", enlace.host);
-        console.log("hostname:", enlace.hostname);
-        console.log("port:", enlace.port);
-        console.log("pathname:", enlace.pathname);
-        console.log("search:", enlace.search);
-        console.log("hash:", enlace.hash);
-        console.log("origin:", enlace.origin);
-````
-
-Adicionalmente, la parte de location también tiene una serie de métodos interesantes como por ejemplo
-
-1. .assign(): permite cargar una nueva página en el navegador
-2. .reload(): permite recargar la página actual 
-3. .replace(): permite cargar una nueva página en el navegador sustituyendo a la que está en el historial
-4. open(): permite abrir una nueva ventana con un parámetro determinado, un modo de apertura y unas propiedades
 
 ## Eventos
 
@@ -802,3 +724,231 @@ Otra posibilidad es utilizar los listen para indica que cuando el navegador term
 ````
 
 Con esto, lo que se consigue es poner un escuchador a la ventana para que cuando termine la carga se ejecute la función indicada la cual realiza la instancia de los elementos. En este caso pese a que el script se ejecuta antes que el código HTML, se indica que parte del mismo se ejecute cuando termine de hacer la carga, por lo que la salida no será nula
+
+Adicionalmente a todos los eventos, existen una serie de funciones que no son eventos tal cual pero actuándomelas de forma muy parecida. Estas funciones son los llamos Timers. Se dividen en dos:
+
+- setInterval(): permite ejecutar un código cada X milisegundos. Su uso es muy sencillo, simplemente se indica la función que se quiere ejecutar y el tiempo que transcurrirá entre cada ejecución
+
+````
+            setInterval(function() {
+                console.log('ejecución');
+            }, 3000)
+````
+
+En este ejemplo se ejecutará el log cada 3 segundos. Imaginad que se quiere poner un reloj con el tiempo. Para ello es tan sencillo como poner un timer cada segundo que modifique el contenido de una parte de la página
+
+````
+<body>
+    <h1>La hora es:</h1>
+    <p id="hora"></p>
+
+    <script>
+        window.addEventListener("load", function() {
+            let horaTexto = document.querySelector("#hora");
+            setInterval(function() {
+                console.log("ejecución");
+                let fecha = new Date();
+                horaTexto.textContent = `${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
+                //console.log(`${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`);
+            }, 1000);
+        });
+    </script>
+</body>
+````
+
+En el ejemplo se crea una función setItnterva, la cual se ejecuta cada segundo y se encarga de sacar la fecha actual siendo esta puesta en el elemento cuyo id es hora. 
+
+Del mismo modo que se puede utilizar la función setInterval tal cual, esta también puede ser asignada a una variable. La funcionalidad adicional que ofrece esto es que el set intervalo puede ser parado en cualquier momento llamando a la función clearInterval. En el ejemplo anterior se añade un botón que para e inicia el reloj:
+
+````
+<body>
+    <h1>La hora es:</h1>
+    <p id="hora"></p>
+    <button id="relojButton">Iniciar reloj</button>
+
+    <script>
+        let funcionando = false;
+        let horaTexto = document.querySelector("#hora");
+        let boton = document.querySelector("#relojButton");
+        let timerReloj;
+
+        window.addEventListener("load", function() {
+            boton.addEventListener("click", function() {
+                funcionando ? iniciar(false) : iniciar(true);
+            });
+        });
+
+        function iniciar(paramentro) {
+            if (paramentro) {
+                timerReloj = setInterval(function() {
+                    console.log("ejecución");
+                    let fecha = new Date();
+                    horaTexto.textContent = `${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
+                    //console.log(`${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`);
+                }, 1000);
+                boton.textContent = "Parar reloj";
+                funcionando = true;
+            } else {
+                console.log("entra en false");
+
+                clearInterval(timerReloj);
+                boton.textContent = "Iniciar reloj";
+                funcionando = false;
+            }
+        }
+    </script>
+</body>
+````
+
+
+- setTimeout(): permite ejecutar un código pasado X milisengundos. Su funcionalidad es muy parecida a la anterior, con la diferencia que la ejecución solo se produce una vez
+
+## Trabajar con el BOM
+
+Como se ha dicho, el BOM representa el acceso a información por parte del lenguaje de la capa por la cual se accede a la aplicación web: el navegador. Dentro de este BOM existen multitud de componentes, entre los cuales se encuentra:
+
+- window.history: permite acceder a la información del navegador desde el que se visita la web. Sus principales elementos son
+1. La propiedad length: que indica cuantas páginas se han visitado
+2. Los métodos go, back y forward
+
+````
+        console.log(history.length);
+        console.log(history.back());
+        console.log(history.go(1));
+        console.log(history.forward);
+````
+
+- window.navigator: permite acceder a información del cliente utilizado para acceder a la web. Alguno de sus métodos más utilizados son:
+
+````
+        console.log("appCodeName:", window.navigator.appCodeName);
+        console.log("appName:", window.navigator.appName);
+        console.log("appVersion:", window.navigator.appVersion);
+        console.log("platform:", window.navigator.platform);
+        console.log("product:", window.navigator.product);
+        console.log("userAgent:", window.navigator.userAgent);
+        console.log("javaEnabled:", window.navigator.javaEnabled());
+        console.log("language (used):", window.navigator.language);
+        console.log("language (support):", window.navigator.languages);
+        console.log("conectado a internet?", window.navigator.onLine);
+        console.log("mimeTypes:",window.navigator.mimeTypes);
+        console.log("Plugins:", navigator.plugins);
+````
+
+En el caso de utilizar un navegador en un dispositivo movil, se pueden ejecutar algún método adicional como 
+
+````
+        navigator.getBattery()
+        navigator.vibrate()
+````
+
+- window.screen: permite acceder a información sobre la pantalla del dispositivo 
+
+````
+        console.log("availTop:", window.screen.availTop);
+        console.log("availLeft:", window.screen.availLeft);
+        console.log("availHeight:", window.screen.availHeight);
+        console.log("availWidth:", window.screen.availWidth);
+        console.log("colorDepth:", window.screen.colorDepth);
+        console.log("height:", window.screen.height);
+        console.log("left:", window.screen.left);
+        console.log("orientation:", window.screen.orientation);
+        console.log("pixelDepth:", window.screen.pixelDepth);
+        console.log("top:", window.screen.top);
+        console.log("width:", window.screen.width);
+````
+
+- window.location: permite acceder a información sobre enlaces y/o webs
+
+````
+        var enlace = document.createElement("a");
+        enlace.href = "https://github.com/DevelopSys";
+        console.log("href:", enlace.href);
+        console.log("protocol:", enlace.protocol);
+        console.log("host:", enlace.host);
+        console.log("hostname:", enlace.hostname);
+        console.log("port:", enlace.port);
+        console.log("pathname:", enlace.pathname);
+        console.log("search:", enlace.search);
+        console.log("hash:", enlace.hash);
+        console.log("origin:", enlace.origin);
+````
+
+Adicionalmente, la parte de location también tiene una serie de métodos interesantes como por ejemplo
+
+1. .assign(): permite cargar una nueva página en el navegador
+2. .reload(): permite recargar la página actual 
+3. .replace(): permite cargar una nueva página en el navegador sustituyendo a la que está en el historial
+4. open(): permite abrir una nueva ventana con un parámetro determinado, un modo de apertura y unas propiedades
+
+#### Almacenamiento en el navegador
+
+Se trata de una memoria guardada en navegador, la cual será persistente mientras que este esté abierto. Es importante tener en cuenta que este almacenamiento se guarda del lado del cliente, por lo que solo tendrá persistencia en el navegador del cliente que guarda los datos. Una forma sencilla de ver los datos con los que se están trabajando es mediante la consola de Chrome, en la parte de Application.
+
+Para poder trabajar con el almacenamiento en navegador se realiza mediante la librería Storage, sobre la cual existe una variable del mismo tipo llamada localStorage. Los método utilizados sobre esta variable son:
+
+- setItem(): permite guardar un dato dentro del almacenamiento de navegador. El método recibe dos parámetros, la clave asociada al dato guardado (que será la utilizada para recuperarlo) y el dato que se quiere guardar.
+
+````
+        localStorage.setItem("titulo", "ejemplo");
+````
+Desde ese instante se guardará en el almacenamiento del navegador el dato "ejemplo" con la clave asociada "titulo". Es importante saber que todos los datos que se guardan se hacen con formato string, por lo que sería necesario parsearlos para que puedan ser tratados como se quieran. 
+
+````
+        localStorage.setItem("titulo", "ejemplo");
+        localStorage.setItem("palabra", "ejemplo");
+        localStorage.setItem("numero", 22);
+        localStorage.setItem("boolean", false);
+        let array = ["elemento", 1, false];
+        let objeto = {
+            nombre: "Borja",
+            apellido: "Martín",
+            edad: 18
+        };
+        localStorage.setItem("array", array);
+        localStorage.setItem("objeto", objeto);
+````
+
+- getItem(): permite recuperar un elemento del almacenamiento del navegador mediante su clave asociada. El método recibe como parámetro la clave del objeto que se quiere recuperar. Siguiente con el ejemplo anterior:
+
+````
+
+        console.log(localStorage.getItem("palabra"));
+        console.log(localStorage.getItem("numero"));
+        console.log(localStorage.getItem("boolean"));
+        console.log(localStorage.getItem("array"));
+        console.log(localStorage.getItem("objeto"));
+````
+
+De la misma forma que pasaba en el caso anterior, cualquier elemento que se recupera, se hará con el formato string, por lo que será necesario pasarlo al tipo con el que se quiera trabajar
+
+````
+        localStorage.setItem("numero1", 1);
+        localStorage.setItem("numero2", 2);
+        localStorage.setItem("numero3", 3);
+
+        let suma = localStorage.getItem('numero1') + localStorage.getItem('numero2') + localStorage.getItem('numero3');
+        console.log(suma);
+````
+
+En este caso al recuperar todos los elementos de tipo string la salida por consola será 123. Sin embargo si los datos al mismo tiempo que se recuperan se traducen al tipo concreto la salida sería la correcta
+
+````
+        let suma = parseInt(localStorage.getItem('numero1')) + parseInt(localStorage.getItem('numero2')) + parseInt(localStorage.getItem('numero3'));
+        console.log(suma);
+````
+En este caso al utilizar los elementos como number la salida por consola sería la correcta: 6
+
+Cuando se trabaja con elementos de tipo objeto hay que tener en cuenta que se guardan como string hay que recuperarlo como json
+
+````
+        let objeto = {
+            nombre: "Borja",
+            apellido: "Martín",
+            edad: 18
+        };
+        localStorage.setItem("objeto", JSON.stringify(objeto));
+        console.log(JSON.parse(localStorage.getItem("objeto")));
+````
+
+En este caso se fuerza el almacenamiento del objeto json en string y se recupera de la misma forma. Si se quiere trabajar con cualquier elemento superior como por ejemplo un array sería de la misma forma
