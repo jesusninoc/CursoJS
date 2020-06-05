@@ -1,5 +1,5 @@
 
-1. [Bases del lenguaje](#id2)
+1. [Bases del lenguaje](#indice)
 
 	2. [Use strict](#id1)
 	3. [Variables](#variables)
@@ -220,6 +220,8 @@ console.timeEnd("Tiempo");
 
 - info(), warm(), error(), log(): realizan tareas muy similares con la diferencia que se muestran con estilos diferentes
 
+[Volver al inicio](#indice)
+
 ## Operadores<a name="operadores"></a>
 
 - Asignación
@@ -259,7 +261,6 @@ y--;
 console.log(`Los nuevos valores de las variables son x: ${x} e y: ${y}`);
 ````
 
-
 - *=Multiplicación 
 ````
 var x=1;
@@ -283,6 +284,9 @@ var y=2;
 var modulo = x%y;
 console.log(`El módulo de dividir ${x} entre ${y} es ${modulo}`);
 ````
+
+[Volver al inicio](#indice)
+
 
 ## Comparadores<a name="comparadores"></a>
 
@@ -323,6 +327,8 @@ var ex2=(2==2)&&(3>=6);//false
 var ex3=(2>3)||(17<=40); //true
 var ex4 = false || false; // false
 ````
+
+[Volver al inicio](#indice)
 
 ## Sentencias de control y bucles<a name="sentencias"></a>
 
@@ -464,6 +470,8 @@ Adicionalmente también se cuenta con un bucle foreach que se utiliza para recor
 ````
 
 También se cuanta con la posibilidad de aplicar un forIn y un forOf
+
+[Volver al inicio](#indice)
 
 ## Librerías comunes<a name="librerías"></a>
 
@@ -611,8 +619,9 @@ Al igual que en cualquier objeto de programación, la llamada al método toStrin
         console.log(`El número de palabras que tiene la cadena de texto metida es ${palabras.length} `);
 ````
 
-## Prompt y alert<a name="usuario"></a>
+[Volver al inicio](#indice)
 
+## Prompt y alert<a name="usuario"></a>
 
 Para poder interactura con el usuario mediante consola, se utilizan los siguientes métodos:
 
@@ -654,6 +663,7 @@ En el caso de querer tratar la variable se realizaría de una forma normal
         }
 ````
 
+[Volver al inicio](#indice)
 
 ## Arrays<a name="arrays"></a>
 
@@ -818,6 +828,8 @@ Los métodos que se pueden aplicar a un array son:
         arrayElementos.splice(4);
         console.log('El array tienen una longitud de %d', arrayElementos.length);
 ````
+
+[Volver al inicio](#indice)
 
 ## Funciones<a name="funciones"></a>
 
@@ -1049,6 +1061,8 @@ Imaginad el supuesto que se quieren representar datos traídos de una base de da
 
 En este ejemplo se puede ver que la función traerDatos tiene como parámetro una función de callback, que es utilizada una vez se haya terminado una determinada ejecución. Es importante ver que cuando se llama como parámetro a una función no es necesario poner los paréntesis.
 
+[Volver al inicio](#indice)
+
 ## Objetos<a name="objetos"></a>
 
 Al igual que en cualquier lenguaje de programación orientado a objetos, se pueden crear dichos objetos para poder "almacenar dentro" una serie de características y acciones asociadas al mismo. Para ello existen dos formas de crear objetos. La primera es mediante el uso de la palabra reservada new
@@ -1108,4 +1122,5 @@ Adicionalmente se pude utiliza el acceso por posición para ver el contenido de 
 ````
 console.log(objetoCreado['nombre']);
 ````
- 
+
+[Volver al inicio](#indice)
