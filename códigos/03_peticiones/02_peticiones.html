@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="listaPersonas"></ul>
+    <div id="detallePersonas">
+        <img id="imagenPersonas" />
+    </div>
+    <script>
+        "use strict";
+        let usuarios = [];
+        let lista = document.querySelector("#listaPersonas");
+        let detalle = document.querySelector("#detallePersonas");
+        let imagen = document.querySelector("#imagenPersonas");
+
+        function retornarUsuarios() {
+            return fetch("https://randomuser.me/api/?results=50");
+        }
+
+        function pintarUsuarios(usuarios) {
+            console.log(usuarios.results);
+            usuarios.results.forEach((element) => {
+                let nodo = document.createElement("li");
+                nodo.textContent = `${element.name.title} ${element.name.first} ${element.name.last} `;
+                let nodoInterno = document.createElement("button");
+                nodoInterno.textContent = "Ver detalles";
+                nodoInterno.style.margin = "10px";
+                nodoInterno.addEventListener("click", function() {
+                    console.log(`El id del elemento es: ${element.id.value}`);
+                    console.log(
+                        `La URL que muestra los detalles es: https://randomuser.me/api/?${element.id.value}`
+                    );
+                    detalleUsuario(element.id.value);
+                });
+                nodo.appendChild(nodoInterno);
+                lista.appendChild(nodo);
+            });
+        }
+
+        function detalleUsuario(id) {
+            let url = `https://randomuser.me/api/?${id}`;
+            fetch(url)
+                .then((resultado) => resultado.json())
+                .then((resultado) => {
+                    let imagen = document.querySelector("#imagenPersonas");
+                    imagen.src = resultado.results[0].picture.large;
+
+                });
+        }
+
+        function pintarSoloNombres(usuarios) {
+            usuarios.results.forEach((element) => {
+                console.log(element.name);
+            });
+        }
+
+        function pintarSoloEmail(usuarios) {
+            usuarios.results.forEach((element) => {
+                console.log(element.email);
+            });
+        }
+
+        window.addEventListener("load", () => {
+            retornarUsuarios()
+                .then((resultado) => {
+                    usuarios = resultado.json();
+                    return usuarios;
+                })
+                .then((resultado) => pintarUsuarios(resultado));
+        });
+    </script>
+</body>
+
+</html>

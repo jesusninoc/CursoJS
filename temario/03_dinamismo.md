@@ -952,3 +952,16 @@ Cuando se trabaja con elementos de tipo objeto hay que tener en cuenta que se gu
 ````
 
 En este caso se fuerza el almacenamiento del objeto json en string y se recupera de la misma forma. Si se quiere trabajar con cualquier elemento superior como por ejemplo un array sería de la misma forma
+
+- removeItem(): permite eliminar un elemento del sistema de almacenamiento. El método recibe como parámetro la clave del objeto que se quiere eliminar
+- clear(): permite borrar todos los elementos del sistema de almacenamiento
+- key(): permite recuperar un elemento indicando la posición del mismo. El método recibe como parámetro un number que indica cual es la posición a la que se quiere acceder. 
+- length: propiedad que indica el número de entradas que existen en el sistema
+
+No se trata de un método como tal sino de un evento, pero es interesante saber que se puede actuar ante la modificación del sistema de almacenaje mediante el listener storage
+
+````
+        window.addEventListener("storage", function() {
+            console.log(`El sistema de almacenamiento se ha visto alterado, hay ${localStorage.length} elementos`);
+        })
+````

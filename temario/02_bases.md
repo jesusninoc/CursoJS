@@ -1,3 +1,15 @@
+
+2. [Bases del lenguaje](#id2)
+  3. [Use strict](#id1)
+  4. [Variables](#id1)
+  5. [Operadores](#id1)
+  6. [Librerías comunes](#id1)
+  7. [Bucles](#id1)
+  8. [Prompt y alert](#id1)
+  9. [Arrays](#id1)
+  9. [Funciones](#id1)
+  10. [Objetos](#id1)
+
 Para declarar variables se utilizan las palabras reservadas const, let y var, seguido de su nombre y su valor (si lo tienen)
 
 ````

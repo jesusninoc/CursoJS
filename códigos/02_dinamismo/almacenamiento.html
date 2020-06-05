@@ -32,6 +32,12 @@
         let usuario;
         let usuarios = [];
 
+
+
+        window.addEventListener("storage", function() {
+            console.log(`El sistema de almacenamiento se ha visto alterado, hay ${localStorage.length} elementos`);
+        })
+
         localStorage.setItem("titulo", "ejemplo");
         localStorage.setItem("palabra", "ejemplo");
         localStorage.setItem("numero", 22);
@@ -60,6 +66,9 @@
 
 
         console.log(JSON.parse(localStorage.getItem("objeto")));
+
+
+
 
 
 
