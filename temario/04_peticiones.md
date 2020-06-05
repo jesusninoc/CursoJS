@@ -1,8 +1,18 @@
+## <a name="index"></a>
+
+
+1. Promesas y peticiones AJAX
+	1. [Promesas: uso y creación](#promesas)
+	2. [Peticiones API Rest mediante fetch](#ajax)
+
 ## Peticiones asíncronas
 
 La asincronía es uno de los pilares fundamentales de Javascript ya que permite que determinadas acciones se realicen en segundo plano sin bloquear al resto, pudiendo hacer multitud de tareas al mismo tiempo. 
 
 Hasta este punto ya se han visto alguno de los patrones asíncronos utilizados por js como por ejemplo las funciones callback o los timers. Sin embargo mediante estos patrones puede que muchas de las funcionalidades no se puedan llevar a cabo, por lo que se necesitan otros elementos como por ejemplo las promesas o el patrón async.
+
+## Promesas<a name="promesas"></a>
+
 
 Una promesa básicamente es la ejecución de una acción que no se sabe muy bien cuándo va a terminar, pero que se espera un resultado concreto para poder ser tratado en el momento de la finalización. También es posible que una promesa pueda finalizar de forma incorrecta (como por ejemplo que no responda) y el patrón nos da la posibilidad de tratar este error. Del mismo modo el patrón de promesas permite añadir una capa de complejidad más asignando prioridades. Aunque se explicará en detalle con la ejecución del método fetch, la estructura de una promesa es la siguiente:
 
@@ -87,6 +97,11 @@ Una vez que la promesa está creada se puede llamar igual que se ha hecho anteri
 ````
 
 Lo que hay que tener en cuenta en este código es que la promesa se ejecuta de forma asíncrona al resto de ejecuciones de la página, por lo que no bloquea ninguna acción. Para poder ver esta funcionalidad se ha incorporado una llamada a la función setTimeout
+
+[Volver al inicio](#index)
+
+
+## Peticiones Ajax<a name="ajax"></a>
 
 
 En la mayoría de las aplicaciones, los servicios que proveen datos suelen ser servicios externos que facilitan la consulta y el almacenamiento de datos. En el caso de querer un almacenamiento interno es posible utilizar almacenamiento web (si no se quiere una gran persistencia), un almacenamiento en ficheros, en base de datos locales o directamente en bases de datos externos. En muchas ocasiones es necesario asociar la aplicación con elementos adicionales que den datos "extra" como puede ser servicios de usuarios, datos de elementos externos, etc... Esto es lo que se conoce como API REST. Para poder realizar estas consultas, básicamente lo que hay que hacer es una consulta a través de una URL la cual contesta con los datos pedidos. Para ello en js se utilizan peticiones fetch. 
@@ -460,3 +475,5 @@ El código completo del ejemplo sería el siguiente:
 
 </html>
 ````
+
+[Volver al inicio](#index)

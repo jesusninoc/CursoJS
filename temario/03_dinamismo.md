@@ -2,11 +2,11 @@
 
 3. Trabajo con DOM, BOM y eventos
 
-	4. [Acceso al dom y modificaciones](#dom)
-	6. [Configuración de eventos: en linea y listener](#eventos)
-	7. [Timers: introducción a la asincronía](#timers)
-	8. [Acceso al bom y trabajo el navegador ](#bom)
-	8. [Almacenamiento en navegador](#web)
+	1. [Acceso al dom y modificaciones](#dom)
+	2. [Configuración de eventos: en linea y listener](#eventos)
+	3. [Timers: introducción a la asincronía](#timers)
+	4. [Acceso al bom y trabajo el navegador ](#bom)
+	5. [Almacenamiento en navegador](#web)
 
 Una de las características que hacer muy potente el uso de JS es su alta disponibilidad a la hora de realizar tareas dinámicas. Para ello existen diferentes elementos que se pueden modificar y/o acceder en tiempo real: 
 
