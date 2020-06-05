@@ -1,9 +1,19 @@
+## <a name="index"></a>
+
+3. Trabajo con DOM, BOM y eventos
+
+	4. [Acceso al dom y modificaciones](#dom)
+	6. [Configuración de eventos: en linea y listener](#eventos)
+	7. [Timers: introducción a la asincronía](#timers)
+	8. [Acceso al bom y trabajo el navegador ](#bom)
+	8. [Almacenamiento en navegador](#web)
+
 Una de las características que hacer muy potente el uso de JS es su alta disponibilidad a la hora de realizar tareas dinámicas. Para ello existen diferentes elementos que se pueden modificar y/o acceder en tiempo real: 
 
 - DOM: Document Object Model, es una interfaz para HTML, CSS y SVG que nos facilita una representación en forma de árbol sobre la que podremos trabajar con JavaScript.
 - BOM: Browser Object Model, que contiene información de todos los elementos propios del navegador y/o dispositivos donde se ejecutan como por ejemplo: versión de navegador, tamaños de pantalla, historial 
 
-## Trabajar con el DOM
+## Acceso al DOM y modificaciones<a name="dom"></a>
 
 Se trata del modelo utilizado por el navegador para poder renderizar la página. Se puede asemejar a todo el código HTML escrito en cualquier editor que es interpretado y ejecutado por el propio navegador. Una de las capacidades más interesantes de JS es el acceso a este modelo y la posibilidad de su modificación de forma dinámica a tiempo real. En concreto, no solo es capaz de modificar, añadir o borrar los elementos del DOM, sino también agregar / modificar atributos, elementos CSS, así como reaccionar ante cualquier evento producido en la página
 
@@ -249,8 +259,6 @@ En este caso solo existe una coincidencia, pero en el caso de haber varias tan s
         }
 ````
 
-
-
 - querySelectorAll(): permite pasar un parámetro indicando tanto id como class o etiqueta en el mismo método, incluso anidando elementos. El método devuelve el todos los elementos que cumplan con los parámetros pasados, pudiendo recorrerlos y realizar tareas con ellos
 
 Con el mismo body del ejemplo anterior
@@ -319,8 +327,10 @@ Imaginad ahora que se quiere agregar algún elemento a todos los divs que se ha 
         }
 ````
 
+[Volver al inicio](#index)
 
-## Eventos
+
+## Eventos<a name="eventos"></a>
 
 Como se acaba de ver, una de las principales capacidades de JS es la capacidad de asociar una parte gráfica con una parte lógica. Cuando se está realizando una aplicación web, si solo nos centramos en los elementos gráficos (HTML y CSS), su apariencia quedará muy bien pero tendrá un contenido totalmente estático, de forma que ante cualquier cambio será necesario acceder al código y realizar las modificaciones necesarias. Esto es totalmente inviable en proyectos que requieran por ejemplo de una interacción media por parte del usuario . El ejemplo más claro de esto son los formularios o la forma de interactuar ante cualquier evento.
 
@@ -725,6 +735,11 @@ Otra posibilidad es utilizar los listen para indica que cuando el navegador term
 
 Con esto, lo que se consigue es poner un escuchador a la ventana para que cuando termine la carga se ejecute la función indicada la cual realiza la instancia de los elementos. En este caso pese a que el script se ejecuta antes que el código HTML, se indica que parte del mismo se ejecute cuando termine de hacer la carga, por lo que la salida no será nula
 
+[Volver al inicio](#index)
+
+## Timers<a name="timers"></a>
+
+
 Adicionalmente a todos los eventos, existen una serie de funciones que no son eventos tal cual pero actuándomelas de forma muy parecida. Estas funciones son los llamos Timers. Se dividen en dos:
 
 - setInterval(): permite ejecutar un código cada X milisegundos. Su uso es muy sencillo, simplemente se indica la función que se quiere ejecutar y el tiempo que transcurrirá entre cada ejecución
@@ -803,7 +818,9 @@ Del mismo modo que se puede utilizar la función setInterval tal cual, esta tamb
 
 - setTimeout(): permite ejecutar un código pasado X milisengundos. Su funcionalidad es muy parecida a la anterior, con la diferencia que la ejecución solo se produce una vez
 
-## Trabajar con el BOM
+[Volver al inicio](#index)
+
+## Acceso al BOM y modificaciones<a name="bom"></a>
 
 Como se ha dicho, el BOM representa el acceso a información por parte del lenguaje de la capa por la cual se accede a la aplicación web: el navegador. Dentro de este BOM existen multitud de componentes, entre los cuales se encuentra:
 
@@ -881,7 +898,9 @@ Adicionalmente, la parte de location también tiene una serie de métodos intere
 3. .replace(): permite cargar una nueva página en el navegador sustituyendo a la que está en el historial
 4. open(): permite abrir una nueva ventana con un parámetro determinado, un modo de apertura y unas propiedades
 
-#### Almacenamiento en el navegador
+[Volver al inicio](#index)
+
+## Almacenamiento web<a name="web"></a>
 
 Se trata de una memoria guardada en navegador, la cual será persistente mientras que este esté abierto. Es importante tener en cuenta que este almacenamiento se guarda del lado del cliente, por lo que solo tendrá persistencia en el navegador del cliente que guarda los datos. Una forma sencilla de ver los datos con los que se están trabajando es mediante la consola de Chrome, en la parte de Application.
 
@@ -965,3 +984,5 @@ No se trata de un método como tal sino de un evento, pero es interesante saber 
             console.log(`El sistema de almacenamiento se ha visto alterado, hay ${localStorage.length} elementos`);
         })
 ````
+
+[Volver al inicio](#index)
