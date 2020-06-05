@@ -1,5 +1,7 @@
 
-1. [Bases del lenguaje](#indice)
+## <a name="inicio"></a>
+
+1. Bases del lenguaje
 
 	2. [Use strict](#id1)
 	3. [Variables](#variables)
