@@ -1,5 +1,6 @@
 
 2. [Bases del lenguaje](#id2)
+
   3. [Use strict](#id1)
   4. [Variables](#id1)
   5. [Operadores](#id1)
