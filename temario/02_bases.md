@@ -2,14 +2,21 @@
 1. [Bases del lenguaje](#id2)
 
 	2. [Use strict](#id1)
-	3. [Variables](#id1)
-	4. [Operadores](#id1)
-	5. [Librerías comunes](#id1)
-	6. [Bucles](#id1)
-	7. [Prompt y alert](#id1)
-	8. [Arrays](#id1)
-	9. [Funciones](#id1)
-	10. [Objetos](#id1)
+	3. [Variables](#variables)
+	4. [Operadores](#operadores)
+	5. [Comparadores](#comparadores)
+	6. [Sentencias de control y bucles](#bucles)
+	7.  [Librerías comunes](#librerías)
+	7. [Prompt y alert](#usuario)
+	8. [Arrays](#arrays)
+	9. [Funciones](#funciones)
+	10. [Objetos](#objetos)
+
+
+## Uso de use strict<a name="variables"></a>
+
+## Uso de variables<a name="variables"></a>
+
 
 Para declarar variables se utilizan las palabras reservadas const, let y var, seguido de su nombre y su valor (si lo tienen)
 
@@ -213,7 +220,7 @@ console.timeEnd("Tiempo");
 
 - info(), warm(), error(), log(): realizan tareas muy similares con la diferencia que se muestran con estilos diferentes
 
-### Operadores
+## Operadores<a name="operadores"></a>
 
 - Asignación
 
@@ -277,52 +284,7 @@ var modulo = x%y;
 console.log(`El módulo de dividir ${x} entre ${y} es ${modulo}`);
 ````
 
-
-### Interacción básica con el usuario
-
-Para poder interactura con el usuario mediante consola, se utilizan los siguientes métodos:
-
-- Window.alert(): muestra una ventana por consola
-
-````
-alert("El proceso se ha terminado");
-````
-
-
-- Window.confirm(): pide confirmación al usuario dando la opción de aceptar o cancelar. Para poder tratar la respuesta se debe guardar en una variable la salida de la función confirm.
-
-````
-var confirmacion = confirm("¿estás seguro que quieres terminar el proceso?");
-if (confirmacion){
-	alert("El proceso se ha terminado");
-}
-````
-
-- Window.prompt(): pide un dato al usuario mediante una ventana emergente. De la misma forma que en el caso anterior, se deberá guarda la salida en una variable para poder tratarla más adelante
-
-````
-var nombreIntroducido = prompt("por favor introduce tu nombre");
-````
-
-En el caso de querer tratar la variable se realizaría de una forma normal
-
-````
-        var nombreIntroducido = prompt("por favor introduce tu nombre");
-        var respuesta = confirm(`¿Estás seguro que quieres evaluar el nombre ${nombreIntroducido}?`);
-        if (respuesta) {
-            tieneAes = nombreIntroducido.toLowerCase().includes('a')
-            if (tieneAes) {
-                alert('El nombre introducido tiene alguna a')
-            } else {
-                alert('El nombre introducido no tiene ninguna a')
-            }
-        } else {
-            alert('Proceso terminado');
-        }
-````
-
-### Comparadores
-
+## Comparadores<a name="comparadores"></a>
 
 En cuanto a comparadores existen los tradicionales que se han visto durante el curso de programación:
 
@@ -362,9 +324,9 @@ var ex3=(2>3)||(17<=40); //true
 var ex4 = false || false; // false
 ````
 
-### Bloques de control
+## Sentencias de control y bucles<a name="sentencias"></a>
 
-#### if
+### if
 Sentencia de control que evalúa una serie de condiciones. En el caso de encontrar una condición verdadera ejecuta el cuerpo del su bloque correspondiente
 
 ````
@@ -403,7 +365,7 @@ Su forma de trabajar es idéntica a la vista en java, pudiendo tener tantas sent
         }
 ````
 
-#### if ternario
+### if ternario
 
 Se trata de un if con una sintaxis especial que es la siguiente:
 ````
@@ -425,7 +387,7 @@ Al igual que en todos los casos anteriores se puede concatenar con cualquiera de
 ````
 
 
-#### switch
+### switch
 
 Mismo uso y sintaxis que java
 
@@ -452,7 +414,7 @@ Mismo uso y sintaxis que java
       }
 ````
 
-#### while
+### while
 
 Mismo uso y sintaxis que java
 
@@ -465,7 +427,7 @@ Mismo uso y sintaxis que java
 ````
 
 
-#### do-while
+### do-while
 
 Muy similar al anterior con la diferencia que nos aseguramos a que al menos existe una ejecución
 
@@ -479,7 +441,7 @@ Muy similar al anterior con la diferencia que nos aseguramos a que al menos exis
 
 Con los operadores time() y timeEnd() se puede comprobar cual es el tiempo que se tarda en ejecutar un bucle
 
-#### for
+### for
 
 Sintaxis inicial identica a java
 
@@ -503,9 +465,9 @@ Adicionalmente también se cuenta con un bucle foreach que se utiliza para recor
 
 También se cuanta con la posibilidad de aplicar un forIn y un forOf
 
+## Librerías comunes<a name="librerías"></a>
 
-### Trabajo con fechas
-
+### Date
 Para poder trabajar con Fechas, se utiliza la librería Date.js. Para ello el punto de partida inicial es la creción de un objeto de tipo Date 
 ````
 Date fecha = new Date()
@@ -546,7 +508,6 @@ Que nos devuelven información concreta de aquello que le pidamos. Entre lo que
       console.log("milisegundos: " + ahora.getUTCMilliseconds());
 ````
 
-
 - Setters
 
 Que nos permiten ajustar información concreta. 
@@ -568,7 +529,7 @@ Al igual que en cualquier objeto de programación, la llamada al método toStrin
         console.log(fechaString.toISOString()); // 		2020-05-16T09:40:06.268Z
 ````
 
-### Trabajo con texto
+### String
 
 - .toLowerCase() // .toUpperCase(): Devuelve una cadena de texto en minúscula o mayúscula respectivamente
 
@@ -650,8 +611,51 @@ Al igual que en cualquier objeto de programación, la llamada al método toStrin
         console.log(`El número de palabras que tiene la cadena de texto metida es ${palabras.length} `);
 ````
 
+## Prompt y alert<a name="usuario"></a>
 
-### Arrays 
+
+Para poder interactura con el usuario mediante consola, se utilizan los siguientes métodos:
+
+- Window.alert(): muestra una ventana por consola
+
+````
+alert("El proceso se ha terminado");
+````
+
+- Window.confirm(): pide confirmación al usuario dando la opción de aceptar o cancelar. Para poder tratar la respuesta se debe guardar en una variable la salida de la función confirm.
+
+````
+var confirmacion = confirm("¿estás seguro que quieres terminar el proceso?");
+if (confirmacion){
+	alert("El proceso se ha terminado");
+}
+````
+
+- Window.prompt(): pide un dato al usuario mediante una ventana emergente. De la misma forma que en el caso anterior, se deberá guarda la salida en una variable para poder tratarla más adelante
+
+````
+var nombreIntroducido = prompt("por favor introduce tu nombre");
+````
+
+En el caso de querer tratar la variable se realizaría de una forma normal
+
+````
+        var nombreIntroducido = prompt("por favor introduce tu nombre");
+        var respuesta = confirm(`¿Estás seguro que quieres evaluar el nombre ${nombreIntroducido}?`);
+        if (respuesta) {
+            tieneAes = nombreIntroducido.toLowerCase().includes('a')
+            if (tieneAes) {
+                alert('El nombre introducido tiene alguna a')
+            } else {
+                alert('El nombre introducido no tiene ninguna a')
+            }
+        } else {
+            alert('Proceso terminado');
+        }
+````
+
+
+## Arrays<a name="arrays"></a>
 
 Para poder crear un array se puede realizar dándole un conjunto vacío de elementos, como un conjunto de elementos ya declarados o como un objeto compleja donde se le indica la longitud que tendrá
 
@@ -815,7 +819,7 @@ Los métodos que se pueden aplicar a un array son:
         console.log('El array tienen una longitud de %d', arrayElementos.length);
 ````
 
-### Funciones
+## Funciones<a name="funciones"></a>
 
 Las funciones son todos aquellos métodos que se quieren ejecutar en determinadas partes de una aplicación web, pudiendo ser llamadas en cualquier momento lo que favorece la reutilización.
 
@@ -977,9 +981,7 @@ En JS no es necesario declarar nombre a la funcione, ya que se pueden declarar d
         retornaFuncion();
 ````
 
-
-
-#### Callbacks
+### Callbacks
 
 Un callback no es un elemento propio del lenguaje, sino que se trata de una técnica de programación que permite la animación de funciones una vez estas han terminado de realizar una tarea. Imaginad el elemento de un proceso que tiene dos subprocesos, donde el segundo solo se puede ejecutar una vez haya terminado el primero. En programación esto se consigue utilizando la palabra return junto con la llamada a una función
 
@@ -999,7 +1001,7 @@ Un callback no es un elemento propio del lenguaje, sino que se trata de una téc
 
 Incluso es posible pasar funciones como parámetros, favoreciendo el flujo interno de la ejecución.
 
-#### Ejecuciones asíncronas
+### Ejecuciones asíncronas
 
 Hasta ahora todo el código qué se ejecutaba de una manera secuencial. Cada línea de código se ejecuta después de la anterior. Este estilo de programación en muchos casos puede ser poco productiva, y más hablando de un desarrollo web.
 
@@ -1047,7 +1049,7 @@ Imaginad el supuesto que se quieren representar datos traídos de una base de da
 
 En este ejemplo se puede ver que la función traerDatos tiene como parámetro una función de callback, que es utilizada una vez se haya terminado una determinada ejecución. Es importante ver que cuando se llama como parámetro a una función no es necesario poner los paréntesis.
 
-### Objetos
+## Objetos<a name="objetos"></a>
 
 Al igual que en cualquier lenguaje de programación orientado a objetos, se pueden crear dichos objetos para poder "almacenar dentro" una serie de características y acciones asociadas al mismo. Para ello existen dos formas de crear objetos. La primera es mediante el uso de la palabra reservada new
 
