@@ -1,5 +1,5 @@
 
-## <a name="inicio"></a>
+## <a name="indice"></a>
 
 1. Bases del lenguaje
 
