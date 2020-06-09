@@ -9,11 +9,15 @@
 </head>
 
 <body>
-    <div>
-        <h1>Lista de webs</h1>
+    <div class="titulo">
+        <h1>Cabecera de la web dedicada a jquery</h1>
+        <p> Parrafo correspondiente al primer dív de la página </p>
+    </div>
+    <div id="contenido">
+        <h2>Lista de webs</h2>
 
-        <p>Las webs de algunos equipos de primera división son:</p>
-        <ul>
+        <p id="parrafo_links">Las webs de algunos equipos de primera división son:</p>
+        <ul id="lista_links">
             <li><a href="https://www.fcbarcelona.es/es/">FC. Barcelona</a></li>
             <li><a href="https://www.realmadrid.com">Real Madrid</a></li>
             <li><a href="https://www.sevillafc.es">Sevilla</a></li>
@@ -21,7 +25,7 @@
         </ul>
 
         <p>Las redes sociales de algunos equipos de primera división son:</p>
-        <ul>
+        <ul id="lista_rss">
             <li>
                 <a href="https://twitter.com/FCBarcelona_es?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img src="https://i.pinimg.com/originals/d8/33/c9/d833c9d6f18413f294c9046acbe71abc.png" /><label>Barsa</label></a>
             </li>
@@ -35,29 +39,107 @@
     </div>
 </body>
 
+<style>
+    .parrafos {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 50px;
+        margin: 10px;
+    }
+</style>
+
 <script>
     "use strict";
+
+    let parrafos = $('p');
+    parrafos.addClass('parrafos')
+
+    // devuleve true
+    console.log($('p').first().hasClass('parrafos'));
+
+    //parrafos[0].className = 'parrafos'
+
+    // todos los divs, obteniendo 2
+    let todosDivs = $('div');
+    console.log("Todos los divs son " + todosDivs);
+
+    // todos los párrafos que están dentro de los divs, obteniendo tres
+    let parrafosDivs = $('div p');
+    console.log("Los párrafos de todos los divs son ")
+    console.log(parrafosDivs);
+
+    // todas las listas que están situadas dentro del DOM
+    let listas = $('ul')
+    console.log("Todas las listas son: ")
+    console.log(listas);
+
+    // todos los elementos del div cuyo id es contenido
+    let todoContenidoId = $('div#contenido ')
+    console.log("Las propiedades del div con id contenido son ");
+    console.log(todoContenidoId);
+
+    // todos los elementos del div cuya class es titulo
+    let todoContenidoClass = $('div.titulo ')
+    console.log("Las propiedades del div con class titulo son " + todoContenidoClass);
+
+
+
+    //$('div.titulo').css('font-size', '50px');
+    //todoContenidoClass = $('div.titulo ');
+    //todoContenidoClass.css('font-size', '60px').css('font-style', 'italic');
+    //todoContenidoClass.height('100px')
+    //todoContenidoClass.width('100px')
+
+
+
 
     $(document).ready(realizarCargas());
 
     function realizarCargas(params) {
         console.log("Carga completa");
-        let elementos = $('div ul')
-        elementos.hide()
+        let elementosPrueba = $("div#contenido");
+        console.log(elementosPrueba);
+
+        //console.log(`Elementos junto ${elementosPrueba}`);
+
+        /*let elementos = $("div ul");
+        elementos.hide();
         console.log(elementos[0]);
         elementos.show();
 
-        let imagenesLista = $('ul img')
+        let imagenesLista = $("ul img");
         for (let index = 0; index < imagenesLista.length; index++) {
             const element = imagenesLista[index];
-            element.style.width = '50px';
-            element.style.height = '50px';
-
+            element.style.width = "50px";
+            element.style.height = "50px";
         }
 
+        let parrafos = $("p");
+        let contenido = $("div[id=contenido]").find("#links");
+        let contenidoCompleto = $("div[id=contenido] #links");
 
+        contenidoCompleto.addClass("parrafos");
+*/
 
+        /*
+            // con js
+            let boton = document.querySelector('#boton');
+            boton.addEventListener('click', function(params) {
+                console.log('botón pulsado');
 
+            })
+
+            // con jquery
+            let boton = $('#boton')
+            boton.click(function(params) {
+                console.log('boton pulsado');
+
+            });
+
+            // secccion por id
+            $('#elemento')
+                // seleccion por etiqueta y atributo
+            $('a[hfef*=algo]')
+            */
     }
 </script>
 
