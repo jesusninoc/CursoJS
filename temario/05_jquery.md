@@ -499,6 +499,8 @@ Para poder obtener el valor de los elementos con la pulsación de un boton (aunq
 </script>
 ````
 
+### Serialize
+
 
 ## Eventos
 
@@ -609,6 +611,100 @@ Al igual que pasa en js puro los eventos pueden tener parámetros en la función
     $('#boton').one('click', function(info) {
         console.log(info);
     })
+````
+
+
+
+## Peticiones AJAX
+
+Si recordamos AJAX era la tecnología que permitía realizar peticiones asíncronas a servidores obteniendo y procesando los resultados sin necesidad de refrescar la página para representar los datos. Al igual que cuando se trabajo con js se utilizará un servicio API Rest de prueba: https://randomuser.me/api/?results=50
+
+La realización de una peticion ajax mediante jquery se realiza mediante el método load(), siendo necesario pasarle como parámetro la url de la petición. 
+
+````
+            $('#elementos').load("https://randomuser.me/api/?results=50");
+
+````
+
+Este método devuelve todo el contenido de la petición, sin tratamiento ninguno. Por lo que cargará todo en contenido de la petición en el elemento cuya id sea elementos. En la mayoría de los casos esto no es lo que se necesita, ya que lo que se busca es obtener por ejemplo una respuesta con un objeto json y poder partirla y representarla. Para poder hacer eso se utiliza el método get(), indicando como parámetros la url a consultar, los datos que se pasan a la petición (estos dependen de cada api) u la función de callback que será ejecutada cuando la petición conteste
+
+````
+      $.get(
+        "https://randomuser.me/api/?results=50",
+        {
+          page: 1,
+        },
+        function (respuesta) {
+          console.log(respuesta);
+        }
+      );
+````
+
+Por ejemplo si se quiere hacer una petición donde se devulevan 100 usuarios, se realiza a la url base y se indica el numero de elementos como datos pasados:
+
+````
+        $.get(
+            "https://randomuser.me/api/", {
+                results: 100,
+            },
+            function(respuesta) {
+                console.log(respuesta);
+            }
+        );
+````
+
+En el caso de querer sacar información específica de cada uno de los elementos es tan sencilla como recorrer la respuesta (teniendo en cuenta como está construido el json) y acceder a las propiedades que interesen
+
+````
+        $.get(
+            "https://randomuser.me/api/", {
+                results: 100,
+            },
+            function(respuesta) {
+                console.log(respuesta);
+                respuesta.results.forEach(element => {
+                    console.log(element.email);
+                });
+            }
+        );
+````
+
+
+Si por ejemplo lo que se quiere es representar esa información dentro de un nodo del DOM existente simplemente se tendría que añadir el elemento dentro de un nodo ya creado. Para ello se utilizará el siguiente HTML
+
+````
+<body>
+    <div id="elementos">
+        <ul>
+
+        </ul>
+
+    </div>
+</body>
+````
+
+Con la petición ajax vista anteriormente se puede recorrer la respuesta y anexar al nodo ul un li con la información deseada
+
+````
+<script>
+    let elemento;
+    $(document).ready(() => {
+        let lista = $('#elementos ul');
+        $.get(
+            "https://randomuser.me/api/", {
+                results: 100,
+            },
+            function(respuesta) {
+                console.log(respuesta);
+                respuesta.results.forEach(element => {
+                    console.log(element.email);
+                    lista.append(`<li><img src=${element.picture.thumbnail}> ${element.name.first} ${element.name.last} </li>`);
+                });
+
+            }
+        );
+    });
+</script>
 ````
 
 

@@ -17,8 +17,17 @@
 
 ## Uso de use strict<a name="variables"></a>
 
-## Uso de variables<a name="variables"></a>
+EL modo estricto es un "filtro" que js permite crear códigos más seguros y sin errores ya que no deja pasar ningún elemento que no cumpla con todas las normas de programación. Su uso no es necesario pero si es bastante recomendable ya que permite hacer un código de calidad. Para poder activarlo simplemente hay que poner al inicio del código 'use strict'
 
+Las principales características del modo estricto son:
+
+- no se pueden declarar variables ya declaradas
+- no se puede utilizar un objeto que aún no está declarado
+- no se permite borrar una variable que se usa durante el código
+- no se permite duplicar el nombre de parámetros dentro de una función
+- no se permite nombrar variables con palabras reservadas del lenguaje
+
+## Uso de variables<a name="variables"></a>
 
 Para declarar variables se utilizan las palabras reservadas const, let y var, seguido de su nombre y su valor (si lo tienen)
 
