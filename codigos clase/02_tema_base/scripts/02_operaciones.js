@@ -10,7 +10,7 @@ variableUno = variableDos;;
 // el valor de la operación se guarda en la variableUno
 let varUnoSuma = 4;
 let varDosSuma = 5;
-varUnoSuma+= varDosSuma
+varUnoSuma += varDosSuma
 console.log(`El resultado de la suma es ${varUnoSuma}`);
 // valor de varUno = 9
 // log con ` ${}
@@ -90,13 +90,15 @@ console.log(resultadoComparacion);
 resultadoComparacion = variableUno != variableDos;
 console.log(resultadoComparacion);
 
-variableUno = false;
-variableDos = !variableUno;
+variableUno = 34;
+variableDos = 123;
+// resultado false
+resultadoComparacion = (variableUno > variableDos) && (variableUno > 0);
+
+
 // variableDos = true
 
 // relaciones lógicas
 // AND(&&) y OR (||)
 // C1 (v) && C2(v) && C2(f) => f
 // C1 (f) || C2(f) || C2(f) => f
-
-
