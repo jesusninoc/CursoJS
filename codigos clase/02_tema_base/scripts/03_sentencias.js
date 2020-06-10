@@ -112,6 +112,6 @@ foreach (String elemento : coleccion){
 (argumento/os) => {ejecución}
 */
 
-arrayPalabras.forEach((param, index, hola) =>
-    console.log(`El elemento iterado es ${index} ${param} ${hola}`)
+arrayPalabras.forEach((param, index) =>
+    console.log(`El elemento iterado es ${index} ${param}`)
 );
