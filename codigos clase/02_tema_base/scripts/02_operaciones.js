@@ -38,9 +38,10 @@ console.log(`El resultado de la division es ${varUnoDiv}`);
 
 let varUnoMod = 4;
 let varDosMod = 2;
+// 4 / 2 = 0 resto = 0
 varUnoMod %= varDosMod;
 console.log(`El resultado del módulo es ${varUnoMod}`);
-// valor de varUno = 2
+// valor de varUno = 0
 // log con ` ${}
 
 // ahora su valor es 9
@@ -52,5 +53,50 @@ varUnoSuma--;
 console.log(`despues de decrementar en 2 su valor es de ${varUnoSuma}`);
 // ahora su valor es de 8
 
+// comparadores
+
+variableUno = 10;
+variableDos = 20;
+let resultadoComparacion;
+
+// mayor igual
+
+// 10 > 20 resultado false;
+resultadoComparacion = variableUno > variableDos;
+resultadoComparacion = variableUno >= variableDos;
+// resultado true
+resultadoComparacion = variableUno < variableDos;
+resultadoComparacion = variableUno <= variableDos;
+// resultado false
+resultadoComparacion = variableUno == variableDos;
+
+variableUno = 10;
+variableDos = 10;
+
+// resultado true
+resultadoComparacion = variableUno <= variableDos;
+
+variableUno = 10;
+variableDos = '20';
+
+// resultado true
+resultadoComparacion = variableUno == variableDos;
+console.log(resultadoComparacion);
+
+//resultado 
+resultadoComparacion = variableUno === variableDos;
+console.log(resultadoComparacion);
+
+resultadoComparacion = variableUno != variableDos;
+console.log(resultadoComparacion);
+
+variableUno = false;
+variableDos = !variableUno;
+// variableDos = true
+
+// relaciones lógicas
+// AND(&&) y OR (||)
+// C1 (v) && C2(v) && C2(f) => f
+// C1 (f) || C2(f) || C2(f) => f
 
 
