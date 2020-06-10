@@ -1,6 +1,5 @@
 # Curso JavaScript
 
-
 1. [Introducción](#id1)
 
 	1. [Qué es JavaScript](#id1)
@@ -37,5 +36,3 @@
 
 	1. [Geolocalización y google maps](#id1)
 	2. [Conexión con base de datos](#id1)
-
-## Primer apartado<a name="id1"></a>
