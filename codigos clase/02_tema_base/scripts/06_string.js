@@ -26,3 +26,18 @@ palabra.substring(0, 3);
 
 let correo = 'borja.martin@cesjuanpablosegundo.es';
 // sacar el nombre y sacar el dominio en dos variables.
+console.log(correo.indexOf('@'));
+
+
+let nombre = correo.substring(0, correo.indexOf('@'));
+let dominio = correo.substring(correo.indexOf('@') + 1, correo.length);
+console.log(nombre);
+console.log(dominio);
+
+palabra = "Esto es una palabra que tienes unas cuantas letras";
+let arraySplit = palabra.split(' ');
+console.log(arraySplit.length);
+arraySplit.forEach(element => {
+    let arrayPalabra = element.split('');
+    console.log(`La palabra ${element} tiene ${arrayPalabra.length} letras`);
+});
