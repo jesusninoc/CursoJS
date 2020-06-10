@@ -67,6 +67,33 @@ console.log(VARIABLE_UNO);
 
 // trabajo con variables
 
+let numeroUno = 5;
+let numeroDos = 10;
+
+let palabraUno = "Hola";
+let palabraDos = "Que tal";
+
+let suma = numeroUno + numeroDos;
+let multi = numeroUno * numeroDos;
+let divi = numeroUno / numeroDos;
+let resta = numeroUno - numeroDos;
+console.log(suma);
+console.log(resta);
+console.log(multi);
+console.log(divi);
+
+let sumaPalabras = palabraUno + palabraDos;
+console.log(sumaPalabras);
+
+numeroUno = 213;
+numeroDos = 43;
+let numeroTres = 123;
+suma = numeroUno + numeroDos + numeroTres;
+// console.log("La suma de "+numeroUno+" + "+numeroDos+" + "+numeroTres+" es: "+suma);
+// console.log(`La suma de ${numeroUno} + ${numeroDos} + ${numeroTres} + es: \n${suma}`);
+console.log('%c La suma de %d + %d + %d es: %d','background: #234FFD' ,numeroUno, numeroDos, numeroTres, suma);
+
+
 
 
 
