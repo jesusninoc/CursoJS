@@ -8,7 +8,7 @@ function miPrimeraFuncion() {
 }
 
 function funcionConParametros(parametro1, parametro2) {
-    if (typeof(parametro1) == 'undefined' || typeof(parametro2) == 'undefined') {
+    if (typeof (parametro1) == 'undefined' || typeof (parametro2) == 'undefined') {
         console.log('cuidado que falta algun parametro');
 
     } else {
@@ -58,7 +58,7 @@ let miFuncionFlechaParam = (param1, param2) => {
 };
 
 let mifuncionFlechaRetorno = parametro1 => {
-    if (typeof(parametro1) == 'string') {
+    if (typeof (parametro1) == 'string') {
         parametro1 = parametro1.concat(' algo añadido');
     }
     return parametro1;
@@ -71,7 +71,7 @@ let mifuncionFlechaRetorno = parametro1 => {
 
 function funcionConCallback(param1, callback) {
     console.log(param1);
-    callback();
+    callback(param1);
 }
 
 function sencilla() {
@@ -79,9 +79,23 @@ function sencilla() {
 }
 
 //funcionConCallback(1, sencilla);
-//funcionConCallback(1, () => { console.log('ejecucion desde una funcion sencilla de flecha')});
-funcionConCallback(1, function() {
+/*funcionConCallback("algo por parametros", (param1) => {
+    console.log('ejecucion desde una funcion sencilla de flecha con paramentro ' + param1)
+});*/
+/*funcionConCallback(1, function() {
     console.log('llamado desde una funcion sencilla no de flecha');
-});
+});*/
 
 () => { console.log('ejecucion desde una funcion sencilla de flecha desde fuera') };
+
+function funcionConRetornoEscpecial(params) {
+
+    console.log('Ejecucion desde la funcion primitiva');
+    return function (params) {
+        console.log('Ejecución desde la funcion que retorna');
+        return "asd";
+    }
+}
+
+funcionConRetornoEscpecial(123);
+

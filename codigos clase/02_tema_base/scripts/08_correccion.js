@@ -88,7 +88,7 @@ si se detecta que alguna de las operaciones es negativa el programa parará tras
 de los números
 */
 
-let confirmacion;
+/*let confirmacion;
 
 do {
 
@@ -109,4 +109,139 @@ do {
     }
 } while (confirmacion);
 
-console.log('terminado');
+console.log('terminado');*/
+
+// ejercicio 7,8 y 11
+
+
+/*
+
+7 Crear un array vacío, luego generar 20 números al azar y guardarlos en un array.
+8 Crear una función que salude pasando el nombre por parametro.
+9 Pedir al usuario que introduzca por teclado dos números y mediante funciones mostrar 
+el resultado de todas las operaciones en un cuadro de alerta
+Modificar el ejercicio anterior para que una vez introducidos los números aparezca un 
+cuadro de dialogo preguntando que si se quieren realizar las operaciones.
+En caso de contestar que si aparecerán por consola y con un espacio de 2 segundos entre cada una los 
+resultados de la suma, resta, multiplicación y división.
+*/
+
+let array = [];
+for (let index = 0; index < 20; index++) {
+    // let numero = Math.random() *30;
+    array.push(parseInt(Math.random() * 30));
+}
+
+array.sort();
+/*array.forEach(element => {
+    console.log(element); 
+});*/
+
+function saludo(parametro) {
+    alert(`buenas tardes ${parametro}`)
+}
+
+// saludo('Borja');
+
+/*let numero1 = parseInt(prompt('intro numero 1'));
+let numero2 = parseInt(prompt('intro numero 2'));
+
+let funciones = [suma(numero1, numero2), resta(numero1, numero2), multi(numero1, numero2), division(numero1, numero2)];
+let contador = 0;
+if (!isNaN(numero1) && !isNaN(numero2)) {
+    //alert(`La suma es: ${suma(numero1,numero2)}\nLa resta es: ${resta(numero1,numero2)}\nLa multi es: ${multi(numero1,numero2)}\nLa división es: ${division(numero1,numero2)}`)
+    let confirmacion = confirm('seguro que quiere realizar las operaciones entre los numeros');
+    if (confirmacion) {
+        suma(numero1, numero2)
+    }
+} else {
+    alert('hay algun fallo en la entrada')
+}
+
+// suma -->2--> resta -->2--> multi -->2-->div
+
+
+function suma(op1, op2) {
+    console.log(op1 + op2);
+    setTimeout(() => {
+        resta(numero1, numero2);
+    }, 2000);
+}
+function resta(op1, op2) {
+    console.log(op1 - op2);
+    setTimeout(() => {
+        multi(numero1, numero2);
+    }, 2000);
+}
+function multi(op1, op2) {
+    console.log(op1 * op2);
+    setTimeout(() => {
+        division(numero1, numero2)
+    }, 2000);
+}
+function division(op1, op2) {
+    console.log(op1 / op2);
+}
+
+
+
+/*
+Crea un objeto JSON llamado equipo que tenga los atributos de nombre (string), fundacion (number), 
+estadio (string), posicion (number), plantilla (array string). Dale valor a cada uno de ellos.
+y muestra por consola todos los datos accediendo individualmente a cada uno de ellos
+
+Modifica el ejercicio anterior, creando dos método en el objeto llamado mostrarPlantilla y mostrarDatos. 
+El primero de ellos mostrará por consola el nombre de todos los jugadores, y el segundo mostrará en una 
+sola linea nombre, año de fundación y nombre del estadio
+
+
+Crea dos objetos cuales quiera con la siguiente estructura: { propiedadUno: '1', propiedadDos: 2, 
+propiedadTres: 3, propiedadCuatro: false } y { propiedaduno: '1', propiedadDos: '2', propiedadtres: 
+3, propiedadCuatro: false } . A continuación, comprueba qué nombres de propiedades son iguales entre 
+los objetos, y de estos cuáles coincidentes en valor.
+*/
+
+let jsonEquipo = {
+    nombre: 'Barcelona',
+    anio: 1898,
+    estadio: 'Camp Nou',
+    posicion: 1,
+    plantilla: ['Suarez', 'Messi', 'Iniesta'],
+    plantillaJSON: [{nombre:'suarez',posicion:'delantero',media:90},{nombre:'messi',posicion:'delantero',media:99}],
+    mostrarDatos: ()=>{console.log(`${jsonEquipo.nombre} ${jsonEquipo.anio} ${jsonEquipo.estadio}`);
+    },
+    mostrarPlantilla: ()=>{
+        jsonEquipo.plantilla.forEach(element => {
+            console.log(element);
+        });
+    }
+};
+
+/*console.log(jsonEquipo.nombre);
+console.log(jsonEquipo.anio);
+console.log(jsonEquipo.estadio);
+console.log(jsonEquipo.posicion);
+console.log(jsonEquipo.plantilla);*/
+//jsonEquipo.mostrarDatos();
+//jsonEquipo.mostrarPlantilla();
+//console.log(this);
+//onsole.log(jsonEquipo);
+
+let jsonEquipoMetodos = {};
+
+let jsonUno = {
+    propiedadUno: '1',
+    propiedadDos: 2,
+    propiedadTres: 3,
+    propiedadCuatro: false
+}
+let jsonDos = {
+    propiedaduno: '1',
+    propiedadDos: '2',
+    propiedadtres: 3,
+    propiedadCuatro: false
+}
+
+// salga los valores de las propiedades que se llaman igual
+
+
