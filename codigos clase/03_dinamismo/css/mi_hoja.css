@@ -1,11 +1,42 @@
-.elemento{
-    background: #234234;
+/*p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
 }
 
-#elementos{
-    background: #23423423;
+h1,
+h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: italic;
 }
 
-button:hover{
+.cursiva {
+    font-style: italic;
+}
 
+
+/*#explicacion {
+    font-size: smaller;
+}*/
+
+
+/* div form button {
+    font-size: 60px;
+} */
+
+
+/*p#personalizado {
+    font-size: 60px;
+}
+
+
+
+div#contenido ul.cursiva {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+*/
+
+.personalizado {
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
