@@ -1,0 +1,8 @@
+#formulario {
+    padding: 10px;
+}
+
+form#formulario input,
+form#formulario button {
+    margin: 10px;
+}
