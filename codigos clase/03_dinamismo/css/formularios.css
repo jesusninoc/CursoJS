@@ -2,7 +2,4 @@
     padding: 10px;
 }
 
-form#formulario input,
-form#formulario button {
-    margin: 10px;
-}
+input[name=grupo] :checked {}

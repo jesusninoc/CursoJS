@@ -20,21 +20,113 @@
                     <input id="nombre" type="text" maxlength="10" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="introduce nombre" />
                     <input id="apellido" type="text" maxlength="20" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="introduce apellido" />
                     <input id="telefono" type="number" maxlength="9" step="2" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="introduce telefono" />
-                    <button type="button" class="btn btn-primary btn-block" id="botonEnviar" onclick="botonPulsado()">
+                    <button type="button" class="btn btn-primary btn-block" id="botonEnviar">
               Enviar
             </button>
                 </form>
             </div>
-            <div class="col-6">
+            <div class="col-6" id="cambioColor">
                 <h3>Lista de usuarios</h3>
-                <ul>
-                    <li>ejemplo</li>
-                </ul>
+                <ul id="personas" class="list-group"></ul>
             </div>
         </div>
+
+        <div class="row" style="margin: 10px;">
+            <label>R: </label>
+            <input type="range" max="255" id="rojo" />
+            <label>G: </label>
+            <input type="range" max="255" id="verde" />
+            <label>B: </label>
+            <input type="range" max="255" id="azul" />
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h3>Operaciones:</h3>
+                <form id="formularioOperaciones">
+                    <input id="operando1" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="introduce operando1" />
+                    <input id="operando2" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="introduce operando2" />
+                    <div class="input-group-text">
+                        <label for="suma">Sum</label
+              ><input
+                id="suma"
+                type="radio"
+                aria-label="Suma"
+                name="grupo"
+                value="1"
+              />
+              <label for="resta">Rest</label
+              ><input
+                id="resta"
+                type="radio"
+                aria-label="Resta"
+                name="grupo"
+                value="2"
+              />
+              <label for="multiplicacion">Multi</label
+              ><input
+                id="multiplicacion"
+                type="radio"
+                aria-label="Multiplicación"
+                name="grupo"
+                value="3"
+              />
+              <label for="division">Div</label
+              ><input
+                id="division"
+                type="radio"
+                aria-label="División"
+                name="grupo"
+                value="4"
+              />
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary btn-block"
+              id="botonCalcular"
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
+        <div class="col-6" id="cambioColor">
+          <h3>Lista de operaciones</h3>
+          <ul id="operacionesLista" class="list-group"></ul>
+        </div>
+      </div>
+
+      <div id="ejericio_tweet" class="row">
+        <div class="col-6">
+          <h3>Entrada:</h3>
+          <form id="formulario tweet">
+            <input
+              id="tweet"
+              type="text"
+              maxlength="255"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm"
+              placeholder="introduce tweet"
+              style="height: 50px;"
+            />
+            <p id='longitudTw'>0/255</p>
+            <button
+              type="button"
+              class="btn btn-primary btn-block"
+              id="botonTweet"
+            >
+              Enviar
+            </button>
+          </form>
+          
+        </div>
+        <div class="col-6" id="cambioColor">
+          <h3>Lista de tweets</h3>
+          <ul id="listaTweets" class="list-group"></ul>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 
-<script type="text/javascript " src="scripts/02_formularios.js "></script>
-
+  <script type="text/javascript " src="scripts/02_formularios.js "></script>
 </html>
