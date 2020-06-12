@@ -1,0 +1,5 @@
+#formulario {
+    padding: 10px;
+}
+
+input[name=grupo] :checked {}

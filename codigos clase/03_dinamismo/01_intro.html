@@ -2,50 +2,65 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <style>
-
-        body{
-            font-style: italic;
-        }
-        #elemento{
-            font-size: 40px;
-        }
-        .elementos{
-            
-        }
-
-        button{
-            font-family: 'Courier New', Courier, monospace;
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/mi_hoja.css" />
 </head>
 
 <body>
+    <div id="contenido">
 
-    <div class="container-fluid">
-        <h1>Ejemplo de acceso y modificaciones de DOM mediante JS</h1>
-        <button type="button" class="btn btn-primary">Pulsame</button>
-        <button type="button" class="btn btn-secondary">Pulsame</button>
-        <button type="button" class="btn btn-info">Pulsame</button>
+        <p id="hora">Hora: 10:01</p>
+        <h1>Titulo de la página con contendigo JS y modificacion DOM</h1>
+
+        <p class="cursiva">
+            Explicación de como funciona el acceso a elementos DOM desde JS, y la aplicación de estilos desde css y css externo
+        </p>
+
+        <h2>Los contenidos que veremos en este tema son:</h2>
+        <ul class="cursiva" id="conocimientos">
+            <li>Estilos CSS</li>
+            <li>Acceso al DOM</li>
+            <li>Seleccion por selectores</li>
+            <li>Moficación y creación de nodos</li>
+            <li>Acceso y modificación BOM</li>
+            <li>Eventos y listener</li>
+        </ul>
+
+        <p class="cursiva" id="personalizado">
+            Con este tema sabremos realizar modificaciones dinámicas en un HMTL
+        </p>
+
+        <ul class="cursiva" id="lista_enlaces">
+            <li><a>css</a></li>
+            <li><a>html</a></li>
+            <li><a>w3c</a></li>
+        </ul>
+
+        <ul class='loquesea'>
+            <li>ejemplo</li>
+        </ul>
+
+        <ul>
+            <li>ejemplo</li>
+        </ul>
     </div>
-    
-    
-    <div class="container-fluid">
-        <h1>Ejemplo de acceso y modificaciones de DOM mediante JS</h1>
-        <button type="button" class="btn btn-primary" id="elemento" >Pulsame</button>
-        <button type="button" class="btn btn-secondary">Pulsame</button>
-        <button type="button" class="btn btn-info" id="elemento">Pulsame</button>
+
+    <div>
+        <p>
+            Este es otro parrafo dentro de un div diferente
+        </p>
+
+        <ul class="cursiva">
+            <li><a>sadsd</a></li>
+        </ul>
     </div>
 
 
 </body>
 
-<script type="text/jaavascript" src="./scripts/01_dinamismo.js"></script>
+<script type="text/javascript" src="./scripts/01_dinamismo.js"></script>
 
 </html>
