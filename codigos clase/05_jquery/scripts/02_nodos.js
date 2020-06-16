@@ -93,8 +93,9 @@ $(document).ready(function() {
 
 
         objeto = $('form').serialize();
-        objeto = $('form').serializeArray();
-        console.log(JSON.stringify(objeto));
+        //objeto = $('form').serializeArray();
+        //console.log(JSON.stringify(objeto));
+        console.log(objeto);
 
 
 
