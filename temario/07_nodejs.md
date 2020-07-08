@@ -255,3 +255,48 @@ gestorEventos.emit('identificador', process.platform);
 ````
 
 ### Gestión de módulos
+
+Ya se ha comentado antes que una de las características más importantes de node es la posibilidad de utilizar código que ya está desarrollado en nuestro proyecto mediante la instalación de módulos con el comando npm install. Una vez los módulos están instalados en nuestro proyecto aparecen en el  archivo package.json y para utilizarlos en el código se utiliza la instancia mediante require y como parámetro el nombre del módulo que se quiere cargar
+ 
+````
+var http = require('http');
+````
+
+Esta variable creada tendrá toda la funcionalidad del módulo http.
+
+De la misma forma que podemos importar los módulos que se han descargado mediante el gestor de paquetes, también se puede crear y exportar nuestros propios módulos para que estos puedan ser utilizados en otras partes del proyecto,. Para esto se debe utilizar la orden export.module = { lo_que_se_quiera_exportar}
+
+Para ello los pasos que hay que realizar son los siguientes:
+
+1. Crear el .js con todas las funciones que se quieran crear y terminar con la orden module.exports
+````
+function funcionaExportar() {
+    console.log('ejecución de una funcion que es ha sido importada');
+}
+
+module.exports = {
+    funcion: funcionaExportar,
+    funcionFlecha: (param) => {
+        console.log('ejecución de una funcion que es ha sido importada como función de flecha con el parámetros ' + param);
+    },
+    variable: false
+};
+````
+
+Hay que tener en cuenta que se pueden exportar tanto funciones que ya están creadas como crear las propias funciones en el .json que se va a exportar. Este json es el formato utilizado para acceder a los datos desde el archivo de importación
+
+2. Importar módulos con la palabra requiere y la ruta del archivo que se quiere importar
+
+````
+// módulo importado http
+let packageName = require('http');
+
+// módulo importado propio
+let propio = require('./04_modulos_exp.js');
+
+console.log(propio);
+propio.funcion();
+propio.funcionFlecha('ejemplo');
+````
+
+Una vez que está importado y guardado en una variable, se puede acceder a  cualquier elemento del .json generado
