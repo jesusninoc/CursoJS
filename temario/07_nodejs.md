@@ -301,3 +301,263 @@ propio.funcionFlecha('ejemplo');
 
 Una vez que está importado y guardado en una variable, se puede acceder a  cualquier elemento del .json generado
 
+## Servidor web con MVC
+
+El modulo core de node ya se ha comentado que se trata de un servidor web donde se ejecutan todos los scripts que se quieran, bien sea un evento o la ejecución de un servicio que accede y modifica el contenido de una página web. Para poder hacer eso de forma lo más correcta posible es necesario separar tantas capas de negocio como se puedan, independizando cada una de las funcionalidades. Para ello se van a crear módulos que trabajan de forma independiente pero que se puede comunicar entre sí. Los módulos que se van a crear son:
+
+1. Servidor: el cual podrá recibir peticiones url, decodificarlas y actuar ante ellas con eventos diferetes
+2. Rutas:  el cual actuará ante una ruta determinada
+3. Funciones: el cual creará todas las funciones necesarias para cada una de las rutas que podrán ser llamadas desde el servidor web
+
+Esta separación es importante ya que cuando la aplicación web tenga un volumen considerable la funcionalidad estará definida cada una en un archivo, sin necesidad de mezclar código. De no hacerlo el proyecto se puede convertir en algo bastante poco legible y muy difícil de trazar
+
+Todos los módulos se juntarán en un archivo llamado índex.html que será el encargado de comunicarlos. Para poder hacer esta implementación se seguirán los siguientes pasos:
+
+### Creación de la estructura
+
+1. Creación del servidor web: 
+
+````
+// servidor.js
+'use strict';
+let http = require('http');
+let servidor;
+
+function iniciarServidor() {
+    servidor = http.createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Servidor iniciado</h1>');
+    });
+    servidor.listen(3000, '127.0.0.1');
+}
+
+module.exports = { funcionServidor: iniciarServidor };
+````
+
+Simplemente se realiza la carga del módulo http y se crea un servidor web que escucha la IP 127.0.0.1:3000 y responde con un mensaje. El módulo es exportado para que pueda ser llamado desde otro fichero
+
+2. Creación del manejo de los eventos: se crea un archivo nuevo donde aparecen todas las funcionalidades que tendrá el servidor web, las cuales dependerán de la ruta llamada
+
+````
+// eventos.js
+function funcionLLamadaUno() {
+    console.log('función llamada desde la ruta uno');
+}
+
+function funcionLLamadaDos() {
+    console.log('función llamada desde la ruta des');
+}
+
+function funcionLLamadaTres() {
+    console.log('función llamada desde la ruta tres');
+}
+
+function funcionLLamadaCuatro() {
+    console.log('función llamada desde la ruta cuatro');
+}
+
+module.exports = { funcionUno: funcionLLamadaUno, funcionDos: funcionLLamadaDos, funcionTres: funcionLLamadaTres, funcionCuatro: funcionLLamadaCuatro }
+
+// también se puede hacer de esta forma
+exports.funcionLLamadaUno = funcionLLamadaUno;
+exports.funcionLLamadaDos = funcionLLamadaDos;
+exports.funcionLLamadaTres = funcionLLamadaTres;
+exports.funcionLLamadaCuatro = funcionLLamadaCuatro;
+
+````
+
+En vez de exportarlas como un módulo también se pueden exportar de forma individual cada una de las funciones, pudiendo acceder a ellas en cualquier momento
+
+3. Creación del las rutas: módulo encargado de ejecutar las funciones creadas en el punto 4 cuando una ruta es llamada
+
+````
+// rutas.js
+function manejarRuta() {
+    console.log('Servidor web con una nueva ruta cargada');
+}
+
+module.exports = { funcionRuta : manejarRuta};
+````
+ Simplemente se exporta la funcion que se ejecutará cuando alguna ruta sea llamada
+
+4. Creación del index:
+
+````
+// index.js
+'use strict';
+
+let servidor = require('./servidor');
+let rutas = require('./rutas');
+let eventos = require('./eventos');
+
+servidor.funcionServidor();
+````
+
+Simplemente se cargan cada uno de los  módulos creados en los puntos anteriores y se llama a la función que levanta el servidor
+
+### Relacionar módulos
+
+En los siguientes puntos lo que se necesita es relacionar módulos entre sí para que las funcionalidades se puedan ejecutar
+
+1. El servidor debe poder analizar la url recibida para poder actuar ante ella. Adicionalmente tendrá que recibir como parámetro la función del módulo ruta para poder ejecutarla cuando llega una petición
+
+````
+'use strict';
+let http = require('http');
+const url = require('url');
+let servidor;
+
+function iniciarServidor(ruta) {
+    servidor = http.createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Servidor iniciado</h1>');
+        console.log(`La petición del servidor es a ${url.parse(req.url).pathname}`);
+        ruta();
+    });
+    servidor.listen(3000, '127.0.0.1');
+}
+
+module.exports = { funcionServidor: iniciarServidor };
+````
+
+El módulo url se encarga de parsear una url y 'cortarla' en partes para que pueda ser utilizada. De esto se encarga el método parse, obteniendo de la url el pathname
+
+````
+url.parse(req.url).pathname
+````
+
+El parámetro pasado en el método es la función exportada del módulo de rutas, siendo ejecutada sin más (por el momento). Para que esto funcione en el index se debe pasar por parámetros a la ejecución del método funcionServidor, la función exportada del módulo de las rutas (una de las funcionalidades de js es poder pasar una función como parámetros)
+
+````
+'use strict';
+
+let servidor = require('./servidor');
+let rutas = require('./rutas');
+let eventos = require('./eventos');
+
+servidor.funcionServidor(rutas.funcionRuta);
+````
+
+Con este punto lo que se consigue es que al acceder a cualquier petición url el servidor web actúe y ejecute por consola
+
+````
+// tras llamada a 127.0.0.1:3000/prueba
+// ejecutado desde el módulo del servidor
+La petición del servidor es a /prueba
+// ejecutado desde el módulo de las rutas
+Servidor web con una nueva ruta cargada
+````
+
+2. Las rutas: para que la función de las rutas pueda actuar de forma personalizada ante una petición URL, debe recibir como parámetro un string con el nombre de la ruta
+
+````
+// rutas.js
+function manejarRuta(path) {
+    console.log('Servidor web con una nueva ruta cargada: ' + path);
+}
+
+module.exports = { funcionRuta: manejarRuta };
+````
+
+Para que esto funcione, es necesario pasar como parámetro a la función de las rutas cuando se produce una petición en el servidor web. Para eso se utiliza el pathname sacado en el punto anterior
+
+````
+// servidor.js
+'use strict';
+let http = require('http');
+const url = require('url');
+let servidor;
+
+function iniciarServidor(ruta) {
+    servidor = http.createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Servidor iniciado</h1>');
+        ruta(url.parse(req.url).pathname);
+    });
+    servidor.listen(3000, '127.0.0.1');
+}
+
+module.exports = { funcionServidor: iniciarServidor };
+````
+
+Con esto se consigue que la funcionalidad se ejecute desde el archivo de rutas.js y este sea llamado dependiendo de las peticiones obtenidas en el archivo servidor.js
+
+
+4.   Asociar diferentes eventos a rutas: Por último queda asociar las diferentes rutas a los eventos creados en el archivo eventos.js. Para ello se crea un objeto json en el index.js donde se asocia el nombre de la ruta con la función exportada del módulo de rutas
+
+````
+// index.js
+'use strict';
+
+let servidor = require('./servidor');
+let rutas = require('./rutas');
+let eventos = require('./eventos');
+
+let eventosHandler = {
+    '/uno': eventos.funcionUno,
+    '/dos': eventos.funcionDos,
+    '/tres': eventos.funcionTres,
+    '/cuatro': eventos.funcionCuatro
+};
+
+servidor.funcionServidor(rutas.funcionRuta, eventosHandler);
+````
+
+Con esto lo que se consigue es que el servidor tenga toda la definición de formas de actuar con un par clave - valor, asociando el nombre de la ruta con la función que se quiere ejecutar. Para que esto funcione, en la función del servidor se trata el eventosHandler.
+
+````
+'use strict';
+let http = require('http');
+const url = require('url');
+let servidor;
+
+function iniciarServidor(ruta, eventos) {
+    servidor = http.createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Servidor iniciado</h1>');
+        //console.log(`La petición del servidor es a ${url.parse(req.url).pathname}`);
+        ruta(url.parse(req.url).pathname, eventos);
+    });
+    servidor.listen(3000, '127.0.0.1');
+}
+
+module.exports = { funcionServidor: iniciarServidor };
+````
+
+Ademas de recibirlo como parámetro se lo pasa a la función de las rutas, para que sea dicha función la encargada de gestionar el funcionamiento
+
+5. Actuar ante una ruta: Inicialmente la función de las rutas solo ejecutaba un log con el nombre de la ruta llamada, pero al pasarle como parámetros el path y los eventos ya se puede diferenciar. 
+
+````
+function manejarRuta(path, eventos) {
+    console.log('Servidor web con una nueva ruta cargada: ' + path);
+    console.log(eventos);
+}
+
+module.exports = { funcionRuta: manejarRuta };
+````
+
+Con esto lo que se consigue es tener en la función el nombre de la ruta llamada y un json con el par nombre_ruta : acción. Simplemente lo único que quedaría sería acceder a la llamada de la ruta correspondiente de la siguiente forma
+
+````
+// se accede a la posición cuya clave es el nombre de la ruta
+eventos[path]()
+````
+
+Si se pone así tal cual puede dar error ya que por ejemplo en la llamada del servidor se puede colar alguna petición como por ejemplo la del favicon. Para solucionarlo, simplemente se pregunta por el tipo de la llamada
+
+````
+function manejarRuta(path, eventos) {
+    console.log('Servidor web con una nueva ruta cargada: ' + path);
+    //console.log(eventos);
+    //eventos[path]();
+    if (typeof eventos[path]() === 'function') {
+        eventos[path]();
+    } else {
+        console.log('Llamada incorrecta, no se trata de una función');
+    }
+
+}
+
+module.exports = { funcionRuta: manejarRuta };
+````
