@@ -561,3 +561,294 @@ function manejarRuta(path, eventos) {
 
 module.exports = { funcionRuta: manejarRuta };
 ````
+
+### Patrón MVC con NodeJS y Express
+
+Como ya se sabe, utilizar un patrón mvc consiste en separar las funcionalidades de la aplicación en tres grandes capas donde solo se comunican entre ellas a través del controlador, es pedir vista -- controlador -- modelo
+
+- Capa Vistas: representa aquello que se va ver en una aplicación. Cuando estamos hablando de NodeJS no existe una representación gráfica como tal, sino que son los datos que se van a transmitir mediante el API, como por ejemplo un JSON.
+- Capa Modelo: representan aquellos que se encargan de gestionar la información. Por ejemplo el tipo de dato que se quiere controlar.
+- Capa Controlador: representan los elementos que deciden qué elementos se van a ejecutar o mostrar sobre el modelo. Por ejemplo cada una de las acciones que se van a llevar a cabo.
+
+En NodeJS existen multitud de frameworks para poder realizar APIs basadas en el modelo MVC que se ha comentado. Uno de los más utilizados en ExpressJS. Para su instalación se utiliza el comando:
+
+````
+npm install express --save
+````
+
+Express facilita la creación del servidor web que se vió en los puntos anteriores, integrando además del patrón MVC la gestión de rutas de forma muy sencilla. Para empezar a utilizar el módulo una vez instalado, se siguen los siguientes pasos:
+
+
+1. Creación de la variable que llama al módulo
+
+````
+let express = require('express');
+````
+
+2. Utilización del método express() para la creación del servidor 
+
+````
+let app = express();
+````
+
+
+3. Utilización de los métodos get o post (dependiendo del tipo de llamada que se quiera hacer), indicando la ruta de la llamada y la acción que se requiere realizar
+
+````
+app.get('/',(req,res)=>{
+    console.log('petición realizada');
+    res.send('petición realizada');
+});
+````
+
+En este ejemplo se utiliza una petición get, ya que devolvería cosas (por ejemplo la select a una base de datos), y mediante el método send de la response incluida en la función de callback se manda al navegador todos aquellos elementos que serán devueltos. Un ejemplo será la contestación del JSON con los resultados de la select procesada
+
+4. Arrancar la aplicación indicando el puerto y dirección que escucha
+
+````
+let server = app.listen(3000,()=>{
+    console.log('servidor abierto;
+})
+````
+Este es un ejemplo de cómo se puede generar una aplicación con express. Sin embargo para poder crear una estructura real MVC se puede realizar mediante un módulo llamado express generator
+
+````
+npm install express-generator --save
+````
+
+Para poder crear una aplicación express con toda la estructura autogenerada se utiliza el comando 
+
+````
+express nombre_aplicacion
+````
+
+Una vez se crea la carpeta con toda la estructura de ficheros interna lo siguiente es situarnos en dicha carpeta y ejecutar el comando ppm para que instale todas las dependencias
+
+````
+cd nombre
+npm install
+````
+
+Una vez instaladas todas las dependencias la aplicación ya estáría funcionando, y tan solo habría que ejecutar el comando npm start (script indicado en el package.json). El puerto que se utiliza por defecto en todas las aplicaciones express es el puerto 3000 por lo que una vez arrancada tan solo es necesario ejecutar el navegador y entrar en la dirección 127.0.0.1:3000
+
+### Gestión de rutas en express
+
+Las rutas están definidas dentro de la carpeta routes, con tantos anchivos js como rutas se quieran gestionar. Todos los archivos de rutas tienen la misma estructura:
+
+````
+// carga de módulos y elementos que se van a utilizar
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+// método a utilizar con la función que se ejecutará
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+// exportación de la variable para que pueda ser utilzada
+module.exports = router;
+````
+
+Para la estructura de las rutas se define el siguiente método
+
+````
+router.Metodo('ruta_a_usar',funcion_que_ejecutará);
+````
+
+En el ejemplo anterior cuando se haga una llamada a la / de la aplicación se contestará con la vista index. En este caso se está respondiendo con una vista que es un archivo .ejs que muestra un html, pero puede ser un json un xml, etc...
+
+Los métodos que se pueden utilizar en la ruta puede ser:
+
+- Get: método utilizado para pedir datos.
+- Post: método utilizado para crear un recurso.
+- Put: método utilzado para actualizar un recurso. 
+- Delete: método utilizado para eliminar un recurso.
+- All: se trata de un comodín que permita realizar cualquier acción.
+
+````
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+router.post('/',(res,req)=>{});
+router.put('/',(res,req)=>{});
+router.delete('/',(res,req)=>{});
+router.all('/all',(res,req)=>{});
+
+
+module.exports = router;
+````
+
+Lo suyo es utilizar solo un elemento por cada una de las rutas. Para poder crear una ruta nueva se siguen los siguientes pasos:
+
+1. Imaginemos que se quiere tener una ruta donde se realice una petición de búsqueda de usuarios (get) y esta sea a la dirección 127.0.0.1/busqueda
+
+````
+// búsqueda.js
+let express = require('express');
+let routes = express.Router();
+
+routes.get('/',(req,res)=>{
+	res.send(''petición realizada);
+});
+
+module.exports = routes;
+````
+
+Es imporante que este archivo se exporta como módulo, para que puede ser cargado en otro sitio
+
+2. Indicar a la aplicación que esa ruta es utilizable por la aplicación. Para ello se incluye en el app.js los siguientes elementos
+
+````
+var busquedaRouter = require('./routes/busqueda');
+app.use('/busqueda', busquedaRouter);
+
+````
+
+Con estas líneas lo que se indica es que se carge el módulo exportado del punto 1 y se le indica a la aplicación de express que cuando reciba una petición desde la dirección /busqueda la resuelva con el contenido del módulo
+
+#### Captura de parámetros
+
+Normalmente cuando se realizan peticiones a una ruta se pasan parámetros para poder ejecutar la acción deseada con datos adicionales. Por ejemplo, si se quiere consultar la información de un usuario cuyo id es 5 se puede hacer de varias formas, donde la forma de captura cambia:
+
+- pasando el parámetro por la ruta: busqueda/5
+
+````
+routes.get('/:id', (req, res, next) => {
+    console.log('peticion realizada');
+    res.send(`recurso pedido con id ${req.params.id}`);
+});
+````
+
+Se indica ven el método de la ruta que se debe acompañar un parámetro con nombre id. Para poder recogerlo, en la respuesta se utiliza el atributo params acompañado del nombre que se indicó al principio. Una vez capturado se podría hacer con él lo que se necesitase. Para indicar que el parámetro es optativo se pone un símbolo de ? al lado del elemento
+
+````
+routes.get('/:id?', (req, res, next) => {})
+````
+
+
+- pasando el parámetro por string querrá: busqueda?id=5
+
+Muy parecido al anterior, con la única diferencia que no es necesario en el método indicar que hay uno o n parámetros. Se suele utiliza para peticiones donde no se conoce el número de elementos que puede incluir la petición
+
+````
+routes.get('/',(req,res,next)=>{
+    console.log('peticion realizada');
+    res.send(`recurso pedido con id ${req.query.id}`);
+
+})
+````
+
+Para capturarlos se utiliza el atributo query
+
+- pasando el parámetro por el cuerpo de la petición (sobre todo utilizado en post y put)
+
+````
+routes.get('/',(req,res,next)=>{
+    console.log('peticion realizada');
+    res.send(`recurso pedido con id ${req.body.id}`);
+})
+````
+
+- pasando el parámetro por las cabeceras (no muy utilizado, reservado para temas de autenticación o formatos  por ejemplo)
+
+Este método será explicado más adelante con el tratamiento de las respuestas
+
+#### Posibles respuestas
+
+Como se ha visto en los ejemplos anteriores, en todos los casos se utilizaba el método send de la respuesta para mandar un dato al navegador, el cual se encarga de representarlo. Sin embargo existen múltiples posibilidades de constestación, donde podemos encontrar los siguientes métodos:
+
+- send(): permite contestar con numerosos tipos de datos. Lo bueno que tiene esto es que detecta el tipo que se manda y lo pone como content-type
+
+````
+router.get('/envio', (req, res, next) => {
+    //res.send('<h1>Respuesta enviada</h1>');
+    res.send({nombre:'Borja',apellido:'Martin',curso:3});
+});
+````
+
+- json(): método especializado para enviar json. A diferencia del anterior permite enviar full o undefined
+
+````
+router.get('/json', (req, res, next) => {
+    res.json({nombre:'Borja',apellido:'Martin',curso:3});
+});
+````
+
+- download(): permite responder una petición con la descarga de un archivo.
+````
+router.get('/', (req, res, next) => {
+    res.download('./files/ejemplos.txt', (error) => {
+        console.log('se ha producido un error');
+        res.send('El archivo no se encuentra')
+    });
+
+});
+````
+
+Los parámetros indicados en el método son la ruta del archivo a descargar y la función que se ejecutará en el caso de existir algún error
+
+- redirect(): permite redireccionar al usuario a otro sitio.
+
+````
+router.get('/redireccion', (req, res, next) => {
+    res.redirect('/foo/bar');
+    res.redirect('http://example.com');
+    res.redirect(301, 'http://example.com');
+    res.redirect('http://example.com', 301);
+    res.redirect('../login');
+});
+````
+
+- renderer(): permite renderizar una vista ya creada (paginas html) con la posibilidad de pasar variables:
+
+````
+router.get('/renderiza', (req, res, next) => {
+    res.render('vista_ejemplo');
+});
+````
+
+En este ejemplo, debe existir una vista creada con el nombre vista_ejemplo en la ruta donde express ubica todos los archivos de vista. Adicionalmente se puede pasar un parámetro (por ejemplo algún elemento capturado desde la url o desde el body) para utilizarlo en la vista. Para ello se agrega como siguiente parámetro en formato json:
+
+````
+router.get('/renderiza/:id?', (req, res, next) => {
+    if (req.query.id != 'undefined'){
+        res.render('vista_ejemplo_datos',{id: req.query.id});
+    } else {
+        res.render('vista_ejemplo');
+    }
+});
+````
+
+De esta forma se indica que la url puede o no tener un dato por string query. En caso de no tenerlo renderizará la vista vista_ejemplo. En caso de si tenerlo capturará el dato y se lo pasará a la vista vista_ejemplo_datos para que lo utilice.
+
+````
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de respuesta</title>
+</head>
+
+<body>
+
+    <h1>Ejemplo de vista</h1>
+    <p>Esto es un ejemplo de vista que será cargada directamente desde una ruta, utilizando el método renderer <br />
+        Adicionalmente se han pasado a los siguientes parámetros
+    </p>
+    <ul>
+        <li> <%=id%>
+        </li>
+    </ul>
+
+</body>
+
+</html>
+````
