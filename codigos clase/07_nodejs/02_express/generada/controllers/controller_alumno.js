@@ -1,4 +1,4 @@
-'use strinct'
+'use strict';
 
 var modeloAlumno = require('../models/modeloAlumno');
 var mongoConexion = require('../mongo');

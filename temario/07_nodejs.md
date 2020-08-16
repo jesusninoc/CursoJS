@@ -656,6 +656,8 @@ Para la estructura de las rutas se define el siguiente método
 router.Metodo('ruta_a_usar',funcion_que_ejecutará);
 ````
 
+En la función a ejecutar se puede indicar tanto directamente la función, como la función de un controlador que se define en un archivo separado. Más adelante se verá esto.
+
 En el ejemplo anterior cuando se haga una llamada a la / de la aplicación se contestará con la vista index. En este caso se está respondiendo con una vista que es un archivo .ejs que muestra un html, pero puede ser un json un xml, etc...
 
 Los métodos que se pueden utilizar en la ruta puede ser:
@@ -711,6 +713,67 @@ app.use('/busqueda', busquedaRouter);
 ````
 
 Con estas líneas lo que se indica es que se carge el módulo exportado del punto 1 y se le indica a la aplicación de express que cuando reciba una petición desde la dirección /busqueda la resuelva con el contenido del módulo
+
+#### Con un controlador externo
+
+En los ejemplos anteriores se puede ver como cuando se resuelve la petición se indica que función se debe ejecutar, recibiendo como parámetros la req y res de la petición. Esta forma es válida pero ensucia el código de forma que puede hacerlo poco legible. Lo suyo es aplicar el patrón MVC lo máximo posible. Para ello se declara un archivo nuevo llamado controlador, en el cual se crea un objeto JSON que tiene todas las funciones que se quieren ejecutar: 
+
+````
+// controllerUno.js
+var controlador = {
+    funcionUno: (req, res) => {
+        res.status(200).send({ menssage: 'llamado corretamente' });
+        //console.log('metodo prueba llamado');
+    },
+    funcionDos: (req, res) => {
+        res.status(200).send({ menssage: 'llamado corretamente' });
+        //console.log('metodo prueba llamado');
+    },
+    funcionTres: (req, res) => {
+        res.status(200).send({ menssage: 'llamado corretamente' });
+        //console.log('metodo prueba llamado');
+    },
+	funcionCuatro: (req, res) => {
+        res.status(200).send({ menssage: 'llamado corretamente' });
+        //console.log('metodo prueba llamado');
+    },
+	funcionCinco: (req, res) => {
+        res.status(200).send({ menssage: 'llamado corretamente' });
+        //console.log('metodo prueba llamado');
+    },
+	funcionUSeis: (req, res) => {
+        res.status(200).send({ menssage: 'llamado corretamente' });
+        //console.log('metodo prueba llamado');
+    },
+
+}
+````
+
+Es muy imporante que al final del archivo se exporte la variable creada para que pueda ser utilizada en aquellos archivos que la requieran (los de ruta)
+
+````
+module.exports = controlador;
+````
+
+Una vez creado este archivo donde se definen todas las funcionalidades, tan solo se debe modificar el archivo donde se definen las rutas para que cada una de ellas se asocie a una de las funciones declaradas
+
+````
+// rutas.js
+var router = express.Router();
+const controlador = require('../controllers/controllerUno.js');
+//var cliente = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+router.get('/get', funcionUno});
+router.post('/post', funcionDos);
+router.get('/controlador', funcionTres);
+router.post('/insertar', funcionCuatro);
+router.get('/listar', funcionCinco);
+router.delete('/eliminar/:id', funcionSeis);
+module.exports = router;
+````
+
+
 
 #### Captura de parámetros
 
@@ -852,3 +915,262 @@ De esta forma se indica que la url puede o no tener un dato por string query. En
 
 </html>
 ````
+
+## Almacenamiento externo con MongoDB
+
+Una de las bases de datos no relaciónales más utilizadas en la actualidad por su facilidad de uso y su velocidad en transacciones (por su poco tamaño) es MongoDB. Para descargar el motor se puede hacer desde este [link](https://www.mongodb.com/cloud/atlas/signup) y el cliente gráfico desde este otro [link](https://robomongo.org/download) seleccionando solo la opción de Robo3T. 
+
+Antes de comenzar a conectar el backend con la base de dato Mongo, es necesario la instalación de una serie de paquetes que permiten tanto la conexión como la gestión y conversión de objetos de objetos entre la bd y el código de programación. Es recomendable instalarlos en el proyecto para así tenerlos siempre reverenciados:
+
+````
+sudo npm install mongodb --save
+sudo npm install mongosee --save
+````
+
+Una vez instalados los módulos necesarios se crean archivo para configurar y crear la conexión. Existe la posibilidad de llamar a los métodos nada más arrancar la aplicación node (en el app.js) o que sean requeridos solo cuando son usados
+
+````
+// mongo.js
+var conexion;
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+conexion = {
+    conectar: () => {
+        mongoose.connect('mongodb://127.0.0.1/nombre_db').then(() => {
+            console.log('conexiónn realizada con existo');
+        }).catch((err) => {
+            console.log(`Error ${err}`);
+        });
+    },
+    desconectar: () => {
+        mongoose.disconnect();
+    }
+}
+
+module.exports = conexion;
+````
+
+En aquellos elementos donde sea necesario la llamada a la apertura o cierre de la base de datos se tendrá que requerir este archivo
+
+Para este ejemplo se va a realizar una conexión con una base de datos que se llama centro, donde tiene una colección llamada alumnos la cual guarda nombre, apellidos, anios, experiencia, cursos. Hay que recordad que Mongo pone un id a cada uno de los objetos creados en la base de datos de forma automática, el cual nunca se repite. Para poder facilitar la conexión y el manejo de los objetos de la base de datos se utiliza un esquema, el cual representa un objeto de la colección con la que se quiere tratar. Para ello es necesario crear un fichero llamado modeloAlumno que se define de la siguiente forma
+
+````
+// modeloAlumno.js
+'use strict'
+var mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+let usuario = new Schema({
+    nombre: String,
+    apellidos: String,
+    anios: Number,
+    curso: Number,
+    experiencia: Boolean
+});
+
+module.exports = mongoose.model('alumno', usuario);
+````
+
+Lo más importante en este fichero es que la última línea indica que se utilizará la colección llamada alumno (en el caso de no existir se creará).
+
+Una vez hecho esto la aplicación está preparada para poder conectar con la base de datos. Para ello se necesita configurar la conexión mediante el fichero llamado mongo.js
+
+````
+var conexion;
+//const modelo = require('../modelo');
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+conexion = {
+    conectar: () => {
+        mongoose.connect('mongodb://127.0.0.1/centro').then(() => {
+            console.log('conexión realizada con existo');
+        }).catch((err) => {
+            console.log(`Error ${err}`);
+        });
+    },
+    desconectar: () => {
+        mongoose.disconnect();
+    }
+}
+
+module.exports = conexion;
+````
+
+En este fichero se indica la dirección del servidor y la base de datos que conectará. Una de las posibilidades es la creación de un objeto json con los métodos de conectar y desconectar para que pueda ser llamado desde los ficheros que requieran de la conexión
+
+### Operaciones CRUD
+
+En el siguiente ejemplo se mostrará el funcionamiento de las operaciones CRUD mediante las rutas:
+
+````
+router.post('/insertar', controllerAlumno.insertar);
+router.get('/listar', controllerAlumno.listar);
+router.get('/listarTodos', controllerAlumno.listarTodos);
+router.put('/modificar/:id', controllerAlumno.modificar);
+router.delete('/eliminar/:id', controllerAlumno.eliminar);
+````
+
+Estas rutas están indicadas en el fichero de la petición, asociando cada ruta a un método del controlador
+
+#### Inserción
+
+Se realiza mendiante el Schema declarado de mongoose. Para ello se declara el siguiente método en el objeto exportado del controlador:
+````
+'use strict';
+
+var modeloAlumno = require('../models/modeloAlumno');
+var mongoConexion = require('../mongo');
+
+var controlador = {
+    insertar: (req1, res1) => {
+        mongoConexion.conectar();
+        var alumno = new modeloAlumno();
+        var param = req1.body;
+        alumno.nombre = param.nombre;
+        alumno.apellidos = param.apellidos;
+        alumno.anios = param.edad;
+        alumno.curso = param.curso;
+        alumno.experiencia = param.experiencia;
+        console.log(alumno);
+
+        alumno.save((error, alumnoStorage) => {
+                if (error) {
+                    return res1.status(500).send({ message: 'error al guardar' });
+                } else {
+                    mongoConexion.desconectar();
+                    return res1.status(200).send({ alumno: alumnoStorage });
+                }
+            }
+
+        );
+
+    },
+}
+
+module.exports = controlador;
+````
+
+Lo primero que es necesario es el requerimiento tanto del modelo como del archivo de conexión. Dentro del método insertar se crea un objeto del modelo el cual es rellenado con los parámetros capturados del body de la petición. Por último se utiliza el método save, el cual tiene una función de callback que tiene dos parámetros: 
+
+- Cuando se produce un error
+- El usuario guardado: de no producirse un error se retorna el json del alumno guardado. Esto no es necesario ya que el guardado se realiza directamente 
+
+#### Borrado
+
+Para poder eliminar un registro se realiza directamente sobre el objeto modeloAlumno creado en el ejemplo anterior.
+
+````
+'use strict';
+
+var modeloAlumno = require('../models/modeloAlumno');
+var mongoConexion = require('../mongo');
+
+var controlador = {
+    eliminar: (req, res) => {
+
+        paramId = req.params.id
+        modeloAlumno.findByIdAndDelete(paramId, (err, result) => {
+            if (err) {
+                return res.status(500).send({ messaje: 'error en el borrado' });
+            }
+            if (!result) {
+                return res.status(400).send({ messaje: 'no se pudo borrar, sin coincidencia' });
+            }
+
+            return res.status(400).send({ alumno: result });
+        });
+
+    }
+}
+
+module.exports = controlador;
+
+
+````
+
+En este caso se utiliza el método modeloAlumno.findByIdAndDelete donde recibe como parámetro el id del elemento que se quiere eliminar y una función de callback. En el caso de querer borrar un elemento por otro parámetro primero se deberá buscar (en los ejemplos siguientes) y después borralo por el id del elemento encontrado. También ese importante ver que el id se captura de la petición de la url. Para ello se crea la petición con el siguiente formato (en el archivo de las rutas)
+
+````
+router.delete('/eliminar/:id', controllerAlumno.eliminar);
+````
+
+#### Actualización 
+
+Se trata de una operación muy parecida a la anterior, con la única diferencia que se pasa un objeto con los parámetros que se quieran actualizar. En este ejemplo se actualiza por id y el elemento encontrado actualiza el parámetro edad
+
+````
+'use strict';
+
+var modeloAlumno = require('../models/modeloAlumno');
+var mongoConexion = require('../mongo');
+
+var controlador = {
+    modificar: (req, res4) => {
+        var paramentroId = req.params.id;
+        var paramentros = req.body;
+        //var paramentros= res.query;
+        mongoConexion.conectar();
+
+        modeloAlumno.findByIdAndUpdate(paramentroId,
+            (paramentros), (err, result) => {
+                if (err) {
+                    return res4.status(500).send({ messaje: 'error en la busqueda' });
+                }
+                if (!result) {
+                    return res4.status(400).send({ messaje: 'no hay coincidencias en la busqueda' });
+                }
+                return res4.status(200).send({ messaje: 'hay coincidencias', alumno: result });
+            });
+    }}
+
+module.exports = controlador;
+````
+
+En este caso la variable parámetros captura todos los elementos que se van a actualizar. Es importante que el nombre de estos elementos coincida con el nombre de las keys de los parámetros de la base de datos.
+
+#### Buscar
+
+Para hacer la búsqueda se realiza mediante el método find y la ejecución de la función. En el caso de querer buscar un elemento por si id es muy sencillo ya que tan solo se ejecuta el método findById y devuelve un único elemento
+
+````
+listar: (req, res) => {
+        var id = req.query.id;
+        console.log(id);
+        mongoConexion.conectar();
+        modeloAlumno.findById(id, (err, alumnoEncontrado) => {
+            if (err) {
+                return res.status(500).send({ message: 'error en la consulta', error: err });
+            }
+            if (!alumnoEncontrado) {
+                return res.status(400).send({ message: 'el alumno de la consulta no existe' });
+            }
+
+            return res.status(200).send({ alumno: alumnoEncontrado });
+        });
+
+    }
+````
+
+Si se quiere buscar por otro parámetro las posibilidades de resultado son más por lo que primero se ponen las condiciones como objeto json en el el método find y luego se ejecuta
+
+````
+listarTodos: (req, res) => {
+        mongoConexion.conectar();
+        modeloAlumno.find({}).sort('-anios').exec((err, results) => {
+            if (err) {
+                return res.status(500).send({ messaje: 'error en el listado' });
+            }
+            if (results.length == 0) {
+                return res.status(400).send({ messaje: 'no hay elementos coincidentes' });
+            }
+
+            return res.status(200).send({ messaje: 'resultado correcto', resultado: results });
+        });
+    }
+````
+
+
+
+
